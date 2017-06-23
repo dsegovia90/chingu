@@ -22,7 +22,6 @@ module.exports = function(passport){
 					return done(err)
 				}
 
-        console.log('here')
 				if(user){
 					return done(null, user)
 				}else{
@@ -32,11 +31,11 @@ module.exports = function(passport){
 					newUser.slack.displayName = profile.user.name
 					newUser.slack.email = profile.user.email
 					newUser.slack.image = profile.user.image_1024
-					newUser.slack.team = profile.user.team
+					newUser.slack.team = profile.team
 
 					newUser.save(function(err){
 						if(err) throw err
-						return done(null, newUser)
+            return done(null, newUser)
 					})
 				}
 			})
