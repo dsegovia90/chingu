@@ -4,6 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var SlackStrategy = require('passport-slack').Strategy
+var passport = require('passport')
+var session = require('express-session')
+var mongoose = require('mongoose')
 require('dotenv').config()
 
 var index = require('./routes/index');
@@ -23,6 +27,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Initialize mongoose with the .env variable
+mongoose.connect(process.env.MONGO_URI)
+// mongoose.Promise = global.Promises
+
+// Point to the passport config file
+require('./config/passport.js')(passport)
+app.use(passport.initialize());
+app.use(passport.session())
+
+// Used to keep session during page changes
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: true
+}))
 
 //subapps
 app.use('/', index);
