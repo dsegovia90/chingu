@@ -2,15 +2,15 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport')
 
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
     return next()
-  }else{
+  } else {
     res.redirect('/')
   }
 }
 
-router.use(function(req, res, next){
+router.use(function (req, res, next) {
   res.locals.user = req.user
   next()
 })
@@ -24,12 +24,16 @@ router.get('/', function (req, res, next) {
 router.get('/auth/slack', passport.authenticate('slack'));
 
 /* Slack OAuth callback url */
-router.get('/auth/slack/callback', 
+router.get('/auth/slack/callback',
   passport.authenticate('slack', { failureRedirect: '/login' }),
   (req, res) => {
     res.redirect('/')
   }
 );
 
+router.get('/logout', isLoggedIn, function (req, res) {
+  req.logout()
+  req.redirect('/')
+})
 
 module.exports = router;
