@@ -33,7 +33,7 @@ router.get('/auth/slack/callback',
 
 router.get('/logout', isLoggedIn, function (req, res) {
   req.logout()
-  req.redirect('/')
+  res.redirect('/')
 })
 
 module.exports = router;
