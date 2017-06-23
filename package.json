@@ -11,7 +11,11 @@
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
     "express": "~4.15.2",
+    "express-session": "^1.15.3",
+    "mongoose": "^4.10.8",
     "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-slack": "0.0.7",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2"
   }
