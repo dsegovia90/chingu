@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+require('dotenv').config()
 
 var index = require('./routes/index');
 var admin = require('./routes/admin');
@@ -22,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//subapps
 app.use('/', index);
 app.use('/admin', admin);
 
