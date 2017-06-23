@@ -31,11 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(process.env.MONGO_URI)
 // mongoose.Promise = global.Promises
 
-// Point to the passport config file
-require('./config/passport.js')(passport)
-app.use(passport.initialize());
-app.use(passport.session())
-
 // Used to keep session during page changes
 app.use(session({
 	secret: 'secret',
@@ -43,9 +38,14 @@ app.use(session({
 	saveUninitialized: true
 }))
 
+// Point to the passport config file
+require('./config/passport.js')(passport)
+app.use(passport.initialize());
+app.use(passport.session())
+
 //subapps
 app.use('/', index);
-app.use('/admin', admin);
+app.use('/admin', admin); //for future development
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
