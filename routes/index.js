@@ -44,7 +44,7 @@ router.post('/create-request', isLoggedIn, function(req, res) {
       console.log(err);
       res.send("Oh, Phooey.");
     }
-    res.send("Request added to database.");
+    res.redirect('/');
   });
 });
 
@@ -55,7 +55,7 @@ router.post('/cancel-request', isLoggedIn, function(req, res) {
       console.log(err);
       res.send("error in /cancel-request route");
     }
-    res.send("pending request canceled");
+    res.redirect('/');
   });
 });
 
