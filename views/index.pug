@@ -8,7 +8,8 @@ if !user
     img(src="https://api.slack.com/img/sign_in_with_slack.png")
 
 if user
-  include includes/message.pug
+  if message
+    include includes/message.pug
   p Welcome <strong>#{user.slack.displayName}</strong> from team: <strong>#{user.slack.team.name}</strong>.
 
   form(action='/create-request' method='post')
