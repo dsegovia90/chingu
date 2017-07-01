@@ -11,4 +11,9 @@ if user
   -var welcomeStr = 'Welcome <strong>' + user.slack.displayName + '</strong> from team: <strong>' + user.slack.team.name + '</strong>.'
   p !{welcomeStr}
 
+  form(action='/create-request' method='post')
+    input(type='input' name='testing' value='test value')
+    |
+    button(type='submit' name='submit') Request a Partner
+
   a(href='/logout') Logout

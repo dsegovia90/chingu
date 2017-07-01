@@ -33,9 +33,16 @@ router.get('/auth/slack/callback',
   }
 );
 
-/* Handle form submission - partner request */
+/* Handle form submission - create request for partner */
 router.post('/create-request', isLoggedIn, function(req, res) {
+  console.log(req.body);
   res.send("okay then");
+});
+
+/* Handle form submission - cancel request for partner */
+router.post('/cancel-request', isLoggedIn, function(req, res) {
+  console.log(req.body);
+  res.send("nevermind?");
 });
 
 router.get('/logout', isLoggedIn, function (req, res) {
