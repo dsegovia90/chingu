@@ -8,8 +8,8 @@ if !user
     img(src="https://api.slack.com/img/sign_in_with_slack.png")
 
 if user
-  -var welcomeStr = 'Welcome <strong>' + user.slack.displayName + '</strong> from team: <strong>' + user.slack.team.name + '</strong>.'
-  p !{welcomeStr}
+  include includes/message.pug
+  p Welcome <strong>#{user.slack.displayName}</strong> from team: <strong>#{user.slack.team.name}</strong>.
 
   form(action='/create-request' method='post')
     input(type='input' name='testing' value='test value')

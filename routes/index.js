@@ -32,7 +32,7 @@ router.get('/auth/slack/callback',
   }
 );
 
-/* Handle form submission - create request for partner */
+/* Handle form submission - create/update request for partner */
 router.post('/create-request', isLoggedIn, function(req, res) {
   // TODO: check for a match!!!
   User.findOneAndUpdate({_id: res.locals.user}, { $set: {
@@ -42,20 +42,36 @@ router.post('/create-request', isLoggedIn, function(req, res) {
   } }, function(err, doc) {
     if (err) {
       console.log(err);
-      res.send("Oh, Phooey.");
+      message = "Oops! There was an error processing your application.";
     }
-    res.redirect('/');
+    else {
+      message = "Thank you for applying for a pair programming parter!";
+    }
+    res.render('index', {
+      title: 'Chingu PP',
+      slack_id: process.env.SLACK_CLIENT_ID,
+      message: message
+    });
   });
 });
 
 /* Handle form submission - cancel request for partner */
 router.post('/cancel-request', isLoggedIn, function(req, res) {
   User.findOneAndUpdate({_id: res.locals.user}, { $unset: {pending: ""} }, function(err, doc) {
+    var message;
+
     if (err) {
       console.log(err);
-      res.send("error in /cancel-request route");
+      message = "Oops! There was an error canceling your request.";
     }
-    res.redirect('/');
+    else {
+      message = "Your request for a pair programming partner has been cancelled.";
+    }
+    res.render('index', {
+      title: 'Chingu PP',
+      slack_id: process.env.SLACK_CLIENT_ID,
+      message: message
+    });
   });
 });
 
