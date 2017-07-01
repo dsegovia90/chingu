@@ -10,10 +10,9 @@ var User = new Schema({
     team: Object
 	},
 	pending: {
-		created: { type: Date, default: Date.now },
+		created: Date,
 		timezone: Number, // UTC -5 entered as -5
 		level: Number, // Based on FCC levels completed?
-		interests: [String] // To pair by interest (e.g. data science, p1xt guides)
 	}
 });
 

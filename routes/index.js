@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-
 var User = require('../models/users');
 
 function isLoggedIn(req, res, next) {
@@ -35,14 +34,29 @@ router.get('/auth/slack/callback',
 
 /* Handle form submission - create request for partner */
 router.post('/create-request', isLoggedIn, function(req, res) {
-  console.log(req.body);
-  res.send("okay then");
+  // TODO: check for a match!!!
+  User.findOneAndUpdate({_id: res.locals.user}, { $set: {
+    pending: {
+      created: Date.now()
+    }
+  } }, function(err, doc) {
+    if (err) {
+      console.log(err);
+      res.send("Oh, Phooey.");
+    }
+    res.send("Request added to database.");
+  });
 });
 
 /* Handle form submission - cancel request for partner */
 router.post('/cancel-request', isLoggedIn, function(req, res) {
-  console.log(req.body);
-  res.send("nevermind?");
+  User.findOneAndUpdate({_id: res.locals.user}, { $unset: {pending: ""} }, function(err, doc) {
+    if (err) {
+      console.log(err);
+      res.send("error in /cancel-request route");
+    }
+    res.send("pending request canceled");
+  });
 });
 
 router.get('/logout', isLoggedIn, function (req, res) {

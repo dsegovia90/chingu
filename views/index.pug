@@ -13,7 +13,9 @@ if user
 
   form(action='/create-request' method='post')
     input(type='input' name='testing' value='test value')
-    |
     button(type='submit' name='submit') Request a Partner
+
+  form(action='/cancel-request' method='post')
+    button(type='submit' name='submit') Cancel Request
 
   a(href='/logout') Logout
