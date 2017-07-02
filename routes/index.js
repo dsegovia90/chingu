@@ -18,7 +18,9 @@ router.use(function (req, res, next) {
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Chingu PP', slack_id: process.env.SLACK_CLIENT_ID });
+  res.render('index', {
+    title: 'Chingu PP',
+    slack_id: process.env.SLACK_CLIENT_ID });
 });
 
 /* Start slack OAuth flow */
@@ -33,50 +35,10 @@ router.get('/auth/slack/callback',
 );
 
 /* Handle form submission - create/update request for partner */
-router.post('/create-request', isLoggedIn, function(req, res) {
-  // TODO: check for a match!!!
-  User.findOneAndUpdate({_id: res.locals.user}, { $set: {
-    pending: {
-      created: Date.now()
-    }
-  } }, function(err, doc) {
-    var data = {
-      title: 'Chingu PP',
-      slack_id: process.env.SLACK_CLIENT_ID,
-    };
-
-    if (err) {
-      console.log(err);
-      data.message = "Oops! There was an error processing your application.";
-    }
-    else if (doc.pending.created) {
-      data.message = "Success - your request has been updated!";
-    }
-    else {
-      data.message = "Thank you for applying for a pair programming parter!";
-    }
-    res.render('index', data);
-  });
-});
+router.use('/create-request', isLoggedIn, require('./create-request'));
 
 /* Handle form submission - cancel request for partner */
-router.post('/cancel-request', isLoggedIn, function(req, res) {
-  User.findOneAndUpdate({_id: res.locals.user}, { $unset: {pending: ""} }, function(err, doc) {
-    var data = {
-      title: 'Chingu PP',
-      slack_id: process.env.SLACK_CLIENT_ID,
-    };
-
-    if (err) {
-      console.log(err);
-      data.message = "Oops! There was an error canceling your request.";
-    }
-    else if (doc.pending.created){
-      data.message = "Your request for a pair programming partner has been cancelled.";
-    }
-    res.render('index', data);
-  });
-});
+router.post('/cancel-request', isLoggedIn, require('./cancel-request'));
 
 router.get('/logout', isLoggedIn, function (req, res) {
   req.logout();
