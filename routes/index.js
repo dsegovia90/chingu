@@ -23,22 +23,14 @@ router.get('/', function (req, res, next) {
     slack_id: process.env.SLACK_CLIENT_ID });
 });
 
-/* Start slack OAuth flow */
-router.get('/auth/slack', passport.authenticate('slack'));
-
-/* Slack OAuth callback url */
-router.get('/auth/slack/callback',
-  passport.authenticate('slack', { failureRedirect: '/login' }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
+/* Handle slack OAuth process */
+router.use('/auth', require('./auth'));
 
 /* Handle form submission - create/update request for partner */
 router.use('/create-request', isLoggedIn, require('./create-request'));
 
 /* Handle form submission - cancel request for partner */
-router.post('/cancel-request', isLoggedIn, require('./cancel-request'));
+router.use('/cancel-request', isLoggedIn, require('./cancel-request'));
 
 router.get('/logout', isLoggedIn, function (req, res) {
   req.logout();
