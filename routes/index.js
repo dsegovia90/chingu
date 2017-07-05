@@ -7,7 +7,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect('/');
+    res.redirect('/login');
   }
 }
 
@@ -17,10 +17,17 @@ router.use(function (req, res, next) {
 });
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', {
+router.get('/', isLoggedIn, function (req, res, next) {
+  res.render('dash', {
     title: 'Chingu PP',
     slack_id: process.env.SLACK_CLIENT_ID });
+});
+
+router.get('/login', function(req, res) {
+  res.render('index', {
+    title: 'Chingu PP',
+    slack_id: process.env.SLACK_CLIENT_ID
+  });
 });
 
 /* Handle slack OAuth process */

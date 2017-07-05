@@ -1,0 +1,27 @@
+include includes/layout.pug
+
+header
+  div #{title}
+  div
+    img(src=`${user.slack.team.image_34}`)
+    div #{user.slack.displayName}
+
+if message
+  section
+    p #{message}
+
+section
+  if user.pending.created
+    h3 Welcome, #{user.slack.displayName}! You have 1 pair programming request pending.
+    form(action="/cancel-request" method="post")
+      button Cancel Request
+  else
+    h3 Welcome, #{user.slack.displayName}! Ready to start pair programming?
+    div
+      button(id="request-form-button") Request a Partner
+
+div(id="request-form")
+  form(action="/create-request" method="post")
+    button Submit Form
+
+script(src='/main.js')

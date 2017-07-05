@@ -11,12 +11,8 @@ router.post('/', function(req, res) {
 
     if (err) {
       console.log(err);
-      data.message = "Oops! There was an error canceling your request.";
     }
-    else if (doc.pending.created){
-      data.message = "Your request for a pair programming partner has been cancelled.";
-    }
-    res.render('index', data);
+    res.redirect('/');
   });
 });
 
