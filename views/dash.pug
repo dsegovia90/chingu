@@ -17,12 +17,6 @@ header
           -timeText = (timezone === 0 ? '±0' : timeText)
           option(value=timezone selected = selected ) UTC#{timeText}
 
-         
-        
-        
-      
-
-
 if message
   section
     p #{message}
@@ -37,13 +31,8 @@ section
     .request-form-div
       button(id="request-form-button") Request a Partner
 
-  
-
 #request-form
   form(action="/create-request" method="post")
     button Submit Form
-
-
-  
 
 script(src='/main.js')
