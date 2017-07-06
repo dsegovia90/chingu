@@ -26,6 +26,14 @@ document.getElementById('timezone-select').addEventListener('change', function (
       var userInfo = JSON.parse(xhr.responseText);
     }
   };
+
+  // This is able to recieve data back from the server. 
+  xhr.onreadystatechange = function(){
+    if(this.readyState!==4)return
+    if(this.status===200){
+      console.log(this.responseText)
+    }
+  }
   xhr.send(JSON.stringify({
     newTimeZone: e.target.value
   }));
