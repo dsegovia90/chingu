@@ -2,11 +2,12 @@
 //   console.log('clicked');
 //   document.getElementById("request-form").style.display = "block";
 // });
+
 document.getElementById('timezone-select').addEventListener('change', function(e){
   console.log(e.target.value);
   
   var xhr = new XMLHttpRequest();
-    xhr.open('PUT', '/update-user');
+    xhr.open('PUT', '/update-timezone');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
         if (xhr.status === 200) {
