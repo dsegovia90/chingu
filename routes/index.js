@@ -37,8 +37,8 @@ router.use('/auth', require('./auth'));
 router.put('/update-user', isLoggedIn, function(req, res){
   console.log(req.body.newTimeZone); //this attribute is sent by the ajax request
   User.findOne({_id: req.user._id}, function(err, user){
-    user.pending.timezone = req.body.newTimeZone
-    user.save()
+    user.pending.timezone = req.body.newTimeZone;
+    user.save();
   });
   res.json({received: true})
 });
