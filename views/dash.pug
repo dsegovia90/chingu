@@ -4,7 +4,7 @@ header
   div #{title}
   div
     -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-    img(src=avatar width=125 length=125)
+    img#avatar(src=avatar width=125 length=125)
     div #{user.slack.displayName}
 
 if message

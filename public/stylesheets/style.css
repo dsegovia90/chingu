@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+#avatar {
+  border-radius: 50%;
+}
+
 #request-form {
   display: none;
 }
