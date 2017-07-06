@@ -31,7 +31,7 @@ document.getElementById('timezone-select').addEventListener('change', function (
   xhr.onreadystatechange = function(){
     if(this.readyState!==4)return
     if(this.status===200){
-      console.log(this.responseText)
+      console.log(JSON.parse(this.responseText))
     }
   }
   xhr.send(JSON.stringify({
