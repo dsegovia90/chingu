@@ -23,7 +23,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
   });
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', function (req, res) {
   res.render('index', {
     title: 'Chingu PP'
   });
