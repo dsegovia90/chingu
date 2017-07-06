@@ -1,23 +1,11 @@
 include includes/layout.pug
 
-  .title-div 
-    h1 #{title}
-  .user-div
+header
+  div #{title}
+  div
     -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-    img#avatar(src=avatar width=125 height=125)
-    p #{user.slack.displayName} 
-      small
-        a(href='/logout') Logout
-    -var timezones = [-12,-11,-10,-9.5,-9,-8,-7,-6,-5,-4,-3.5,-3,-2.5,-2,-1,0,1,2,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,9.5,10,10.5,11,12,13,14]
-    form()#timezone-form
-      select(form='timezone-form')#timezone-select
-        if !user.pending.timezone
-          option#undefined-option(value=undefined )
-        each timezone in timezones
-          -var selected = (user.pending.timezone === timezone ? true : false)
-          -var timeText = (timezone > 0 ? '+' + timezone : timezone)
-          -timeText = (timezone === 0 ? '±0' : timeText)
-          option(value=timezone selected = selected ) UTC#{timeText}
+    img#avatar(src=avatar width=125 length=125)
+    div #{user.slack.displayName}
 
 if message
   section
@@ -30,10 +18,10 @@ section
       button Cancel Request
   else
     h3 Welcome, #{user.slack.displayName}! Ready to start pair programming?
-    .request-form-div
+    div
       button(id="request-form-button") Request a Partner
 
-#request-form
+div(id="request-form")
   form(action="/create-request" method="post")
     button Submit Form
 

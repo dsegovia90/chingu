@@ -1,8 +1,22 @@
 include includes/layout.pug
 
-.welcome-div
-  h1= title
-  h3 Welcome to #{title}
-  p Please use the button below to sign in with your slack group. 
+h1= title
+h3 Welcome to #{title}
+
+if !user
   a(href='/auth/slack')
-    img(src="https://api.slack.com/img/sign_in_with_slack.png")
+    img(src='images/sign_in_with_slack.png' alt='Slack sign in button.')
+
+if user
+  if message
+    include includes/message.pug
+  p Welcome <strong>#{user.slack.displayName}</strong> from team: <strong>#{user.slack.team.name}</strong>.
+
+  form(action='/create-request' method='post')
+    input(type='input' name='testing' value='test value')
+    button(type='submit' name='submit') Request a Partner
+
+  form(action='/cancel-request' method='post')
+    button(type='submit' name='submit') Cancel Request
+
+  a(href='/logout') Logout

@@ -19,21 +19,19 @@ router.use(function (req, res, next) {
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
   res.render('dash', {
-    title: 'Chingu PP'
-  });
+    title: 'Chingu PP',
+    slack_id: process.env.SLACK_CLIENT_ID });
 });
 
-router.get('/login', function (req, res) {
+router.get('/login', function(req, res) {
   res.render('index', {
-    title: 'Chingu PP'
+    title: 'Chingu PP',
+    slack_id: process.env.SLACK_CLIENT_ID
   });
 });
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
-
-/* Handle ajax request to change timezone */
-router.put('/update-timezone', isLoggedIn, require('./update-timezone'));
 
 /* Handle form submission - create/update request for partner */
 router.use('/create-request', isLoggedIn, require('./create-request'));
