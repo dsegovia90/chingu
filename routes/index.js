@@ -40,6 +40,7 @@ router.put('/update-user', isLoggedIn, function(req, res){
     user.pending.timezone = req.body.newTimeZone;
     user.save();
   });
+  //I would love to send a message back to the app upon successfull change of the timezone @dsegovia90
   res.json({received: true})
 });
 
