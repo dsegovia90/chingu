@@ -33,6 +33,16 @@ router.get('/login', function(req, res) {
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
 
+/* Handle ajax request to change timezone */
+router.put('/update-user', isLoggedIn, function(req, res){
+  console.log(req.body.newTimeZone); //this attribute is sent by the ajax request
+  User.findOne({_id: req.user._id}, function(err, user){
+    user.pending.timezone = req.body.newTimeZone
+    user.save()
+  });
+  res.json({received: true})
+});
+
 /* Handle form submission - create/update request for partner */
 router.use('/create-request', isLoggedIn, require('./create-request'));
 
