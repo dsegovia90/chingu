@@ -1,14 +1,14 @@
-// document.getElementById("request-form-button").addEventListener("click", function() {
-//   console.log('clicked');
-//   document.getElementById("request-form").style.display = "block";
-// });
+document.getElementById("request-form-button").addEventListener("click", function() {
+  console.log('clicked');
+  document.getElementById("request-form").style.display = "block";
+});
 
 document.getElementById('timezone-select').addEventListener('change', function (e) {
-  
+
   /*  Checks if the undefined-option element exists, and
-      if it does, it deletes it. This is to prevent the 
+      if it does, it deletes it. This is to prevent the
       selection of an "undefined" option. In pug's side,
-      if the user has already set up a timezone, the 
+      if the user has already set up a timezone, the
       element won't appear at all. So this function is skipped. */
   if (document.getElementById('undefined-option')) {
     document.getElementById('undefined-option').remove();
@@ -27,7 +27,7 @@ document.getElementById('timezone-select').addEventListener('change', function (
     }
   };
 
-  // This is able to recieve data back from the server. 
+  // This is able to recieve data back from the server.
   xhr.onreadystatechange = function(){
     if(this.readyState!==4)return
     if(this.status===200){
