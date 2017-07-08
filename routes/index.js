@@ -32,7 +32,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
 
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
-  res.render('index', {
+  res.render('login', {
     title: 'Chingu PP'
   });
 });
