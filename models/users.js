@@ -13,7 +13,8 @@ var User = new Schema({
 		created: Date,
 		timezone: Number, // UTC -5 entered as -5
 		level: Number, // Based on FCC levels completed?
-	}
+	},
+	partners: []
 });
 
 module.exports = mongoose.model('User', User);
