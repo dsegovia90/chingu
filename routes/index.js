@@ -3,7 +3,6 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/users');
 
-
 /*  Checks if the user is authenticated, 
     it can be used to redirect to /login unauthenticated 
     access to certain routes. */
@@ -44,16 +43,10 @@ router.get('/logout', isLoggedIn, function (req, res) {
   res.redirect('/');
 });
 
-/* Handle ajax request to change timezone */
-router.put('/update-timezone', isLoggedIn, require('./update-timezone'));
+/* GET, POST and DELETE are in ./request-match */
+router.use('/request-match', isLoggedIn, require('./request-match'))
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
-
-/* Handle form submission - create/update request for partner */
-router.use('/create-request', isLoggedIn, require('./create-request'));
-
-/* Handle form submission - cancel request for partner */
-router.use('/cancel-request', isLoggedIn, require('./cancel-request'));
 
 module.exports = router;
