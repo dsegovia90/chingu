@@ -9,7 +9,23 @@ include includes/layout.pug
     small
       a(href='/logout') Logout
 
-a(href='/request-match')
-  button Request Match
+if(user.pending.created)
+  p Already requested a match. 
+else
+  a(href='/request-match')
+    button Request Match
 
+hr
+
+if(user.pending.created)
+  h3 Match Request
+  p Created: #{user.pending.created}
+  p FCC Lvl: #{user.pending.level}
+  p Timezone: #{user.pending.timezone}
+  p Matched: Not yet Matched
+  a(href='/request-match/delete') Delete
+  br
+  a(href='/request-match') Edit
+else
+  h3 No match requested yet
 script(src='javascripts/main.js')
