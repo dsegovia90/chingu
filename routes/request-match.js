@@ -27,4 +27,12 @@ router.post('/', function (req, res) {
   res.redirect('/')
 })
 
+router.get('/delete', function (req, res) {
+  User.findOne({_id: req.user._id}, function(err, user){
+    user.pending = undefined
+    user.save()
+    res.redirect('/')
+  })
+});
+
 module.exports = router;
