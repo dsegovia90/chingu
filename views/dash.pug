@@ -23,9 +23,9 @@ if(user.pending.created)
   p FCC Lvl: #{user.pending.level}
   p Timezone: #{user.pending.timezone}
   p Matched: Not yet Matched
-  a(href='/request-match/delete') Delete
-  br
   a(href='/request-match') Edit
+  br
+  a(href='/request-match/delete') Delete
 else
   h3 No match requested yet
 script(src='javascripts/main.js')
