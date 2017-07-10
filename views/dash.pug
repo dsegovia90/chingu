@@ -6,9 +6,11 @@ include includes/layout.pug
   -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
   img#avatar(src=avatar width=125 height=125)
   p #{user.slack.displayName} 
-    small
-      a(href='/logout') Logout
-
+  small
+    a(href='/logout') Logout
+    if(user.admin)
+      a(href='/admin') Admin Page
+  
 if(user.pending.created)
   p Already requested a match. 
 else
