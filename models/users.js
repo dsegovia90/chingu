@@ -14,7 +14,8 @@ var User = new Schema({
 		timezone: Number, // UTC -5 entered as -5
 		level: Number, // Based on FCC levels completed?
 	},
-	partners: []
+	partners: [],
+	admin: Boolean
 });
 
 module.exports = mongoose.model('User', User);
