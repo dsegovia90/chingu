@@ -12,7 +12,7 @@ var User = new Schema({
 	pending: {
 		created: Date,
 		timezone: Number, // UTC -5 entered as -5
-		level: Number, // Based on FCC levels completed?
+		fccScore: Number, // Based on FCC levels completed?
 	},
 	partners: [],
 	admin: Boolean
