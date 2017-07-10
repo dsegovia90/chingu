@@ -1,0 +1,12 @@
+include includes/layout.pug
+
+.title-div 
+  h1 #{title}
+.user-div
+  -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+  img#avatar(src=avatar width=125 height=125)
+  p #{user.slack.displayName} 
+  small
+    a(href='/logout') Logout
+    a(href='/') User Page
+script(src='javascripts/main.js')
