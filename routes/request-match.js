@@ -1,38 +1,32 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/users')
+var User = require('../models/users');
+var runMatch = require('../lib/match_user.js');
 
 router.get('/', function (req, res) {
   res.render('request-match');
 });
 
 router.post('/', function (req, res) {
-  var timezone = req.body.timezone;
-  var fccScore = req.body.fccScore;
-
-  User.findOne({ _id: req.user._id }, function (err, user) {
-    console.log(user.pending.created)
-    if (user.pending.created) {
-      user.pending.created = new Date();
-      user.pending.timezone = timezone;
-      user.pending.level = fccScore;
-      user.save()
-    } else {
-      user.pending.created = new Date();
-      user.pending.timezone = timezone;
-      user.pending.level = fccScore;
-      user.save()
+  var update = {
+    $set: {
+      pending: {
+        created: new Date(),
+        timezone: req.body.timezone,
+        fccScore: req.body.fccScore
+      }
     }
-  })
-  res.redirect('/')
-})
+  };
+
+  User.findByIdAndUpdate(req.user._id, update, {new: true}).exec()
+  .then(runMatch);
+
+  res.redirect('/');
+});
 
 router.get('/delete', function (req, res) {
-  User.findOne({_id: req.user._id}, function(err, user){
-    user.pending = undefined
-    user.save()
-    res.redirect('/')
-  })
+  User.findByIdAndUpdate(req.user._id, { $unset: { pending: "" } }).exec();
+  res.redirect('/');
 });
 
 module.exports = router;
