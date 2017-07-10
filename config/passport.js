@@ -12,8 +12,8 @@ module.exports = function(passport){
 	})
 
   passport.use(new SlackStrategy({
-		clientID: process.env.SLACK_CLIENT_ID,;
-		clientSecret: process.env.SLACK_CLIENT_SECRET;
+		clientID: process.env.SLACK_CLIENT_ID,
+		clientSecret: process.env.SLACK_CLIENT_SECRET
 	},
 	function(token, refreshToken, profile, done) {
 		process.nextTick(function(){
