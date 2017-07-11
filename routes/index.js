@@ -25,7 +25,8 @@ router.use(function (req, res, next) {
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
   Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
-  .populate('users', 'slack.displayName slack.image').exec(function(err, matches) {
+  .populate('users', 'slack.displayName slack.image')
+  .exec(function(err, matches) {
     if (err) {
       console.log(err);
       matches = [];
