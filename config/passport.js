@@ -31,7 +31,10 @@ module.exports = function(passport){
 					newUser.slack.displayName = profile.user.name;
 					newUser.slack.email = profile.user.email;
 					newUser.slack.image = profile.user.image_1024;
-					newUser.slack.team = profile.team;
+					newUser.slack.team.name = profile.team.name;
+					newUser.slack.team.id = profile.team.id;
+					newUser.slack.team.domain = profile.team.domain;
+					newUser.slack.team.image = profile.team.image_original;
 					newUser.admin = false;
 
 					newUser.save(function(err){
