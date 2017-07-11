@@ -5,7 +5,8 @@ var runMatch = require('../lib/match_user.js');
 var fcc = require('../lib/fccScore.js');
 
 router.get('/', function (req, res) {
-  res.render('request-match');
+  var fccLevels = fcc.toLevelsArray();
+  res.render('request-match', {fccLevels: fccLevels});
 });
 
 router.post('/', function (req, res) {

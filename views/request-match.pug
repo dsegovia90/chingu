@@ -11,7 +11,14 @@ include includes/layout.pug
         -var timeText = (timezone > 0 ? '+' + timezone : timezone)
         -timeText = (timezone === 0 ? '±0' : timeText)
         option(value=timezone selected=selected) UTC#{timeText}
-    input(type='number' min='0' max='9' value=fccScore name='fccScore')
+
+    select(name='fccScore')
+      each level in fccLevels
+        -var leveltext = (level[0] + " - " + level[1])
+        -var selected = user.profile.fccLevel === leveltext
+        -var val = fccLevels.indexOf(level)
+        option(value=val selected=selected) #{leveltext}
+
     input(type='submit' value='Submit')
   a(href='/')
     button Cancel
