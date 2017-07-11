@@ -7,7 +7,12 @@ var User = new Schema({
 		displayName: String,
     email: String,
     image: String,
-    team: Object
+    team: {
+			name: String,
+			id: String,
+			domain: String,
+			image: String,
+		}
 	},
 	profile: {
 		timezone: Number, // UTC -5 entered as -5
