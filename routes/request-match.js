@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/users');
 var runMatch = require('../lib/match_user.js');
+var fcc = require('../lib/fccScore.js');
 
 router.get('/', function (req, res) {
   res.render('request-match');
@@ -12,7 +13,8 @@ router.post('/', function (req, res) {
     $set: {
       profile: {
         timezone: req.body.timezone,
-        fccScore: req.body.fccScore
+        fccScore: req.body.fccScore,
+        fccLevel: fcc.getLevel(req.body.fccScore)
       },
       pending: {
         created: new Date()
