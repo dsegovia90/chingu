@@ -29,10 +29,10 @@ router.get('/', isLoggedIn, function (req, res, next) {
     title: 'Chingu PP'
   };
 
-  // if new match found, send success message
+  // if new match found, prepare success message
   if (req.user.newMatch) {
     data.message = "Success! You have a new pair programming partner!";
-    User.findOneByIdAndUpdate(req.user._id, {$unset: {newMatch: ""}})
+    User.findByIdAndUpdate(req.user._id, {$unset: {newMatch: ""}})
     .exec(function(err) {
       if (err) {
         console.error(err);
@@ -40,7 +40,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
     });
   }
 
-  // send information on current matches
+  // prepare information on current matches & send response
   Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
   .populate('users', 'slack.displayName slack.image')
   .exec(function(err, matches) {
