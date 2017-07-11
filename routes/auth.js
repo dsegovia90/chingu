@@ -30,7 +30,6 @@ router.get('/slack/install', function (req, res) {
     .then(function(team){
       if(team){
         // Team exists already
-        console.log('team already exists')
         team.accessToken = data.access_token;
         team.scope = data.scope;
         team.userId = data.user_id;
