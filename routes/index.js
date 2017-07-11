@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/users');
 var Match = require('../models/matches');
 
 /*  Checks if the user is authenticated,
@@ -24,22 +25,34 @@ router.use(function (req, res, next) {
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
+  var data = {
+    title: 'Chingu PP'
+  };
+
+  // if new match found, send success message
+  if (req.user.newMatch) {
+    data.message = "Success! You have a new pair programming partner!";
+    User.findOneByIdAndUpdate(req.user._id, {$unset: {newMatch: ""}})
+    .exec(function(err) {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
+
+  // send information on current matches
   Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
   .populate('users', 'slack.displayName slack.image')
   .exec(function(err, matches) {
     if (err) {
-      console.log(err);
-      matches = [];
+      console.error(err);
     }
     else if (matches.length) {
-      matches = matches.map(function(match) {
+      data.matches = matches.map(function(match) {
         return match.users[0];
       });
     }
-    res.render('dash', {
-      title: 'Chingu PP',
-      matches: (matches.length ? matches : null)
-    });
+    res.render('dash', data);
   });
 });
 

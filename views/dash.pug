@@ -1,5 +1,8 @@
 include includes/layout.pug
 
+if(message)
+  .message #{message}
+
 .title-div
   h1 #{title}
 .user-div
