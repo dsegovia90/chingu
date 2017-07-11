@@ -25,10 +25,11 @@ router.use(function (req, res, next) {
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
-  var matches = Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
-  .populate('users').exec(function(err, matches) {
+  Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
+  .populate('users', 'slack.displayName slack.image').exec(function(err, matches) {
     if (err) {
       console.log(err);
+      matches = [];
     }
     else if (matches.length) {
       matches = matches.map(function(match) {
