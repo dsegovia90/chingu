@@ -19,7 +19,6 @@ router.get('/', isLoggedInAndAdmin, function (req, res, next) {
     'partners': 1
   })
   .then(function(userList){
-    console.log(userList)
     res.render('admin', {userList: userList});
   }).catch(function(err){
     console.error(err);

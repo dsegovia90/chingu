@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
   .populate('users', 'slack.displayName slack.image')
   .exec(function(err, matches) {
     if (err) {
-      console.log(err);
+      console.error(err);
       matches = [];
     }
     else if (matches.length) {
