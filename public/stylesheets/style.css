@@ -16,3 +16,7 @@ a {
 #request-form {
   display: none;
 }
+
+#user-table {
+  margin: auto;
+}
