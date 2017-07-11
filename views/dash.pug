@@ -28,6 +28,12 @@ if(user.pending.created)
   a(href='/request-match') Edit
   br
   a(href='/request-match/delete') Delete
+
+if(matches)
+  h3 Your Matches
+  each match in matches
+    -var matchID = match.slack.displayName
+    p #{matchID}
 else
-  h3 No match requested yet
+  h3 No current matches
 script(src='javascripts/main.js')
