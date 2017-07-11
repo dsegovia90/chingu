@@ -8,11 +8,11 @@ include includes/layout.pug
   form(action='/request-match' method='POST')#timezone-form
     select(form='timezone-form' name='timezone')#timezone-select
       each timezone in timezones
-        -var selected = (user.pending.timezone === timezone ? true : false)
+        -var selected = user.pending.timezone === timezone
         -var timeText = (timezone > 0 ? '+' + timezone : timezone)
         -timeText = (timezone === 0 ? '±0' : timeText)
-        option(value=timezone selected = selected ) UTC#{timeText}
+        option(value=timezone selected=selected) UTC#{timeText}
     input(type='number' min='0' value=fccScore name='fccScore')
     input(type='submit' value='Submit')
-    a(href='/')
-      button Cancel
+  a(href='/')
+    button Cancel
