@@ -1,11 +1,11 @@
 include includes/layout.pug
 
-.title-div 
+.title-div
   h1 Chingu PP Admin Page
 .user-div
   -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
   img#avatar(src=avatar width=125 height=125)
-  p #{user.slack.displayName} 
+  p #{user.slack.displayName}
   small
     a(href='/logout') Logout
     a(href='/') User Page
@@ -25,8 +25,8 @@ table#user-table
     tr
       td #{ppUser.slack.displayName}
       td #{teamName}
-      td #{ppUser.pending.timezone}
-      td #{ppUser.pending.fccScore}
+      td #{ppUser.profile.timezone}
+      td #{ppUser.profile.fccScore}
       td #{ppUser.partners[0]}
 
 script(src='javascripts/main.js')

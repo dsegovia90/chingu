@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/*  Checks if the user is authenticated, 
-    it can be used to redirect to /login unauthenticated 
+/*  Checks if the user is authenticated,
+    it can be used to redirect to /login unauthenticated
     access to certain routes. */
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -14,9 +14,10 @@ function isLoggedIn(req, res, next) {
 
 /*  Send the req.user to the view as user variable.
     Even if the user is undefined (this can be used to
-    show or hide data depending if there is a user 
+    show or hide data depending if there is a user
     present or not). */
 router.use(function (req, res, next) {
+  console.log(req.user);
   res.locals.user = req.user;
   next();
 });
@@ -42,7 +43,7 @@ router.get('/logout', isLoggedIn, function (req, res) {
 });
 
 /* GET, POST and DELETE are in ./request-match */
-router.use('/request-match', isLoggedIn, require('./request-match'))
+router.use('/request-match', isLoggedIn, require('./request-match'));
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));

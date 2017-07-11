@@ -9,10 +9,12 @@ var User = new Schema({
     image: String,
     team: Object
 	},
-	pending: {
-		created: Date,
+	profile: {
 		timezone: Number, // UTC -5 entered as -5
-		fccScore: Number, // Based on FCC levels completed?
+		fccScore: Number  // Based on FCC levels completed?
+	},
+	pending: {
+		created: Date
 	},
 	partners: [],
 	admin: Boolean

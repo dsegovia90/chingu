@@ -4,15 +4,15 @@ include includes/layout.pug
 
 .form-div
   -var timezones = [-12,-11,-10,-9.5,-9,-8,-7,-6,-5,-4,-3.5,-3,-2.5,-2,-1,0,1,2,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,9.5,10,10.5,11,12,13,14]
-  -var fccScore = (user.pending.fccScore ? user.pending.fccScore : 0)
+  -var fccScore = (user.profile.fccScore ? user.profile.fccScore : 0)
   form(action='/request-match' method='POST')#timezone-form
     select(form='timezone-form' name='timezone')#timezone-select
       each timezone in timezones
-        -var selected = (user.pending.timezone === timezone ? true : false)
+        -var selected = user.profile.timezone === timezone
         -var timeText = (timezone > 0 ? '+' + timezone : timezone)
         -timeText = (timezone === 0 ? '±0' : timeText)
-        option(value=timezone selected = selected ) UTC#{timeText}
+        option(value=timezone selected=selected) UTC#{timeText}
     input(type='number' min='0' value=fccScore name='fccScore')
     input(type='submit' value='Submit')
-    a(href='/')
-      button Cancel
+  a(href='/')
+    button Cancel
