@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Match = require('../models/matches');
 
 /*  Checks if the user is authenticated,
     it can be used to redirect to /login unauthenticated
@@ -24,8 +25,20 @@ router.use(function (req, res, next) {
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
-  res.render('dash', {
-    title: 'Chingu PP'
+  var matches = Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
+  .populate('users').exec(function(err, matches) {
+    if (err) {
+      console.log(err);
+    }
+    else if (matches.length) {
+      matches = matches.map(function(match) {
+        return match.users[0];
+      });
+    }
+    res.render('dash', {
+      title: 'Chingu PP',
+      matches: (matches.length ? matches : null)
+    });
   });
 });
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Match = new Schema({
-  users: [Schema.Types.ObjectId],
+  users: [{type: Schema.Types.ObjectId, ref: 'User'}],
   created: { type: Date, default: Date.now }
 });
 
