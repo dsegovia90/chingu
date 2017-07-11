@@ -18,7 +18,7 @@ var app = express();
 var store = new MongoDBStore(
   {
     uri: process.env.MONGO_URI,
-    collection: 'mySessions'
+    collection: 'userSessions'
   }
 )
 
