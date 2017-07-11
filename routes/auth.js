@@ -16,10 +16,12 @@ router.get('/slack/callback',
 );
 
 router.get('/slack/install', function (req, res) {
+
   var client_id = process.env.SLACK_CLIENT_ID;
   var client_secret = process.env.SLACK_CLIENT_SECRET;
   var code = req.query.code;
   var redirect_uri = 'http://localhost:3000/auth/slack/install'
+
   slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
     if(err){
       console.error(err);
@@ -28,14 +30,17 @@ router.get('/slack/install', function (req, res) {
     .then(function(team){
       if(team){
         // Team exists already
-        // Send a message that app was already installed, but refreshed the data.
         team.accessToken = data.access_token;
         team.scope = data.scope;
         team.userId = data.user_id;
         team.teamName = data.team_name;
-        team.teamId = data.team_id;
+        team.teamId = data.team_id;s
         team.save(function(err){
-          if(err) throw err
+          if(err) {
+            throw err
+          }else{
+            //send app already installed and success update message
+          }
         })
       }else{
         var newTeam = new Team()
@@ -52,7 +57,7 @@ router.get('/slack/install', function (req, res) {
           }
         })
       }
-      res.redirect('/login');
+      res.redirect('/login')
     })
   })
 })
