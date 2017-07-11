@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var SlackStrategy = require('passport-slack').Strategy
 var passport = require('passport')
 var session = require('express-session')
+var MongoDBStore = require('connect-mongodb-session')(session)
 var mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -13,6 +14,13 @@ var index = require('./routes/index');
 var admin = require('./routes/admin');
 
 var app = express();
+
+var store = new MongoDBStore(
+  {
+    uri: process.env.MONGO_URI,
+    collection: 'userSessions'
+  }
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +39,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Used to keep session during page changes
 app.use(session({
-	secret: 'secret',
+	secret: 'This is our secret.',
 	resave: false,
-	saveUninitialized: true
+	saveUninitialized: true,
+  store: store
 }))
 
 // Point to the passport config file
