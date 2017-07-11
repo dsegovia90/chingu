@@ -11,7 +11,8 @@ var User = new Schema({
 	},
 	profile: {
 		timezone: Number, // UTC -5 entered as -5
-		fccScore: Number  // Based on FCC levels completed?
+		fccScore: Number, // Based on FCC levels completed?
+		fccLevel: String
 	},
 	pending: {
 		created: Date
