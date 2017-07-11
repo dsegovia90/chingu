@@ -1,0 +1,32 @@
+include includes/layout.pug
+
+.title-div
+  h1 Chingu PP Admin Page
+.user-div
+  -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+  img#avatar(src=avatar width=125 height=125)
+  p #{user.slack.displayName}
+  small
+    a(href='/logout') Logout
+    a(href='/') User Page
+
+hr
+
+h3 Users
+table#user-table
+  tr
+    th Display Name
+    th Team
+    th Timezone
+    th FCC Score
+    th Match
+  each ppUser in userList
+    -var teamName = ppUser.slack.team.name.substring(7)
+    tr
+      td #{ppUser.slack.displayName}
+      td #{teamName}
+      td #{ppUser.profile.timezone}
+      td #{ppUser.profile.fccScore}
+      td #{ppUser.partners[0]}
+
+script(src='javascripts/main.js')

@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
-var User = require('../models/users');
 
 /*  Checks if the user is authenticated,
     it can be used to redirect to /login unauthenticated
@@ -45,7 +43,7 @@ router.get('/logout', isLoggedIn, function (req, res) {
 });
 
 /* GET, POST and DELETE are in ./request-match */
-router.use('/request-match', isLoggedIn, require('./request-match'))
+router.use('/request-match', isLoggedIn, require('./request-match'));
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
