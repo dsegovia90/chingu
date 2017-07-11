@@ -10,10 +10,12 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
   var update = {
     $set: {
-      pending: {
-        created: new Date(),
+      profile: {
         timezone: req.body.timezone,
         fccScore: req.body.fccScore
+      },
+      pending: {
+        created: new Date()
       }
     }
   };

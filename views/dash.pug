@@ -1,16 +1,16 @@
 include includes/layout.pug
 
-.title-div 
+.title-div
   h1 #{title}
 .user-div
   -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
   img#avatar(src=avatar width=125 height=125)
-  p #{user.slack.displayName} 
+  p #{user.slack.displayName}
     small
       a(href='/logout') Logout
 
 if(user.pending.created)
-  p Already requested a match. 
+  p Already requested a match.
 else
   a(href='/request-match')
     button Request Match
@@ -20,8 +20,8 @@ hr
 if(user.pending.created)
   h3 Match Request
   p Last Updated: #{user.pending.created}
-  p FCC Lvl: #{user.pending.fccScore}
-  p Timezone: #{user.pending.timezone}
+  p FCC Lvl: #{user.profile.fccScore}
+  p Timezone: #{user.profile.timezone}
   p Matched: Not yet Matched
   a(href='/request-match') Edit
   br
