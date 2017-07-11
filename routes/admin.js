@@ -12,7 +12,12 @@ function isLoggedInAndAdmin(req, res, next) {
 
 /* GET users listing. */
 router.get('/', isLoggedInAndAdmin, function (req, res, next) {
-  User.find({})
+  User.find({}, {
+    'slack.displayName': 1,
+    'slack.team.name': 1,
+    'profile': 1,
+    'partners': 1
+  })
   .then(function(userList){
     res.render('admin', {userList: userList});
   }).catch(function(err){
