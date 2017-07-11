@@ -17,7 +17,6 @@ function isLoggedIn(req, res, next) {
     show or hide data depending if there is a user
     present or not). */
 router.use(function (req, res, next) {
-  console.log(req.user);
   res.locals.user = req.user;
   next();
 });
