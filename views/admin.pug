@@ -19,11 +19,14 @@ table#user-table
     th Team
     th Timezone
     th FCC Score
+    th Match
   each ppUser in userList
+    -var teamName = ppUser.slack.team.name.substring(7)
     tr
       td #{ppUser.slack.displayName}
-      td #{ppUser.slack.team.name}
+      td #{teamName}
       td #{ppUser.pending.timezone}
       td #{ppUser.pending.fccScore}
+      td #{ppUser.partners[0]}
 
 script(src='javascripts/main.js')
