@@ -24,7 +24,8 @@ router.use(function (req, res, next) {
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
   res.render('login', {
-    title: 'Chingu PP'
+    title: 'Chingu PP',
+    installLink: process.env.INSTALL_URI
   });
 });
 
