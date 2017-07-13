@@ -42,6 +42,6 @@ router.use('/request-match', isLoggedIn, require('./request-match'));
 router.use('/auth', require('./auth'));
 
 /* GET home page (i.e. user dash). */
-router.use('/', isLoggedIn, require('./dash'));
+router.get('/', isLoggedIn, require('./dash'));
 
 module.exports = router;
