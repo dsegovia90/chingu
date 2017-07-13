@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/users.js');
+var Match = require('../models/matches.js');
 
 function isLoggedInAndAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.admin) {
@@ -12,17 +13,30 @@ function isLoggedInAndAdmin(req, res, next) {
 
 /* GET users listing. */
 router.get('/', isLoggedInAndAdmin, function (req, res, next) {
-  User.find({}, {
+  let data = {}
+  /* Finds all the users in the same team as the adminUser */
+  User.find({ 'slack.team.id': req.user.slack.team.id }, {
     'slack.displayName': 1,
     'slack.team.name': 1,
     'profile': 1,
     'partners': 1
   })
-  .then(function(userList){
-    res.render('admin', {userList: userList});
-  }).catch(function(err){
-    console.error(err);
-  });
+  .then(function (userList) {
+    data.userList = userList;
+    const _idList = userList.map(function (user) {
+      return user._id
+    })
+    return Match.find({users: { $in: _idList }})
+  })
+  .then(function (matches) {
+    data.matches = matches;
+    res.render('admin', data)
+  })
+  .catch(function(err){
+    console.error(err)
+  })
+
+
 });
 
 module.exports = router;
