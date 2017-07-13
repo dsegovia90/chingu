@@ -1,26 +1,25 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var SlackStrategy = require('passport-slack').Strategy
-var passport = require('passport')
-var session = require('express-session')
-var MongoDBStore = require('connect-mongodb-session')(session)
-var mongoose = require('mongoose')
-require('dotenv').config()
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-var index = require('./routes/index');
-var admin = require('./routes/admin');
+const index = require('./routes/index');
+const admin = require('./routes/admin');
 
-var app = express();
+const app = express();
 
-var store = new MongoDBStore(
+const store = new MongoDBStore(
   {
     uri: process.env.MONGO_URI,
-    collection: 'userSessions'
-  }
-)
+    collection: 'userSessions',
+  },
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,35 +33,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize mongoose with the .env variable
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI);
 // mongoose.Promise = global.Promises
 
 // Used to keep session during page changes
 app.use(session({
-	secret: 'This is our secret.',
-	resave: false,
-	saveUninitialized: true,
-  store: store
-}))
+  secret: 'This is our secret.',
+  resave: false,
+  saveUninitialized: true,
+  store,
+}));
 
 // Point to the passport config file
-require('./config/passport.js')(passport)
-app.use(passport.initialize());
-app.use(passport.session())
+require('./config/passport.js')(passport);
 
-//subapps
+app.use(passport.initialize());
+app.use(passport.session());
+
+// subapps
 app.use('/', index);
-app.use('/admin', admin); //for future development
+app.use('/admin', admin); // for future development
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
