@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Match = require('../models/matches');
 
 /*  Checks if the user is authenticated,
     it can be used to redirect to /login unauthenticated
@@ -22,27 +21,6 @@ router.use(function (req, res, next) {
   next();
 });
 
-/* GET home page. */
-router.get('/', isLoggedIn, function (req, res) {
-  Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
-  .populate('users', 'slack.displayName slack.image')
-  .exec(function(err, matches) {
-    if (err) {
-      console.error(err);
-      matches = [];
-    }
-    else if (matches.length) {
-      matches = matches.map(function(match) {
-        return match.users[0];
-      });
-    }
-    res.render('dash', {
-      title: 'Chingu PP',
-      matches: (matches.length ? matches : null)
-    });
-  });
-});
-
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
   res.render('login', {
@@ -62,5 +40,8 @@ router.use('/request-match', isLoggedIn, require('./request-match'));
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
+
+/* GET home page (i.e. user dash). */
+router.get('/', isLoggedIn, require('./dash'));
 
 module.exports = router;
