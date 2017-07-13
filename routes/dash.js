@@ -27,6 +27,12 @@ router.get('/', function (req, res) {
       console.error(err);
     }
     else if (matches.length) {
+      // each element of matches an object with key/value pairs:
+      // _id: <match>,
+      // created: <date of match creation>,
+      // users: [{ _id: <user>, slack: <obj w/ displayName & image>}]
+
+      // extract user object from matches element
       data.matches = matches.map(function(match) {
         return match.users[0];
       });

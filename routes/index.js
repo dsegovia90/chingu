@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/users');
-var Match = require('../models/matches');
 
 /*  Checks if the user is authenticated,
     it can be used to redirect to /login unauthenticated
