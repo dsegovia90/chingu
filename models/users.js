@@ -22,7 +22,7 @@ var User = new Schema({
 	pending: {
 		created: Date
 	},
-	partners: [],
+	newMatch: Boolean,
 	admin: Boolean
 });
 
