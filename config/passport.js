@@ -19,6 +19,7 @@ module.exports = function passportFunc(passport) {
       process.nextTick(() => {
         User.findOne({ 'slack.id': profile.id })
           .then((user) => {
+            console.log(user);
             if (user) {
               return done(null, user);
             }
@@ -32,6 +33,7 @@ module.exports = function passportFunc(passport) {
             newUser.slack.team.domain = profile.team.domain;
             newUser.slack.team.image = profile.team.image_original;
             newUser.admin = false;
+            newUser.save();
 
             return done(null, newUser);
           })
