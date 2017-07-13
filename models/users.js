@@ -23,6 +23,7 @@ var User = new Schema({
 		created: Date
 	},
 	newMatch: Boolean,
+	matchedTo: {type: Schema.Types.ObjectId, ref: 'User'},
 	admin: Boolean
 });
 
