@@ -14,7 +14,6 @@ function isLoggedInAndAdmin(req, res, next) {
 /* GET users listing. */
 router.get('/', isLoggedInAndAdmin, function (req, res, next) {
   let data = {}
-  /* Finds all the users in the same team as the adminUser */
   User.find({ 'slack.team.id': req.user.slack.team.id }, {
     'slack.displayName': 1,
     'slack.team.name': 1,
@@ -35,8 +34,6 @@ router.get('/', isLoggedInAndAdmin, function (req, res, next) {
   .catch(function(err){
     console.error(err)
   })
-
-
 });
 
 module.exports = router;
