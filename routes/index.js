@@ -23,39 +23,6 @@ router.use(function (req, res, next) {
   next();
 });
 
-/* GET home page. */
-router.get('/', isLoggedIn, function (req, res, next) {
-  var data = {
-    title: 'Chingu PP'
-  };
-
-  // if new match found, prepare success message
-  if (req.user.newMatch) {
-    data.message = "Success! You have a new pair programming partner!";
-    User.findByIdAndUpdate(req.user._id, {$unset: {newMatch: ""}})
-    .exec(function(err) {
-      if (err) {
-        console.error(err);
-      }
-    });
-  }
-
-  // prepare information on current matches & send response
-  Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
-  .populate('users', 'slack.displayName slack.image')
-  .exec(function(err, matches) {
-    if (err) {
-      console.error(err);
-    }
-    else if (matches.length) {
-      data.matches = matches.map(function(match) {
-        return match.users[0];
-      });
-    }
-    res.render('dash', data);
-  });
-});
-
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
   res.render('login', {
@@ -74,5 +41,8 @@ router.use('/request-match', isLoggedIn, require('./request-match'));
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
+
+/* GET home page (i.e. user dash). */
+router.use('/', isLoggedIn, require('./dash'));
 
 module.exports = router;
