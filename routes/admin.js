@@ -11,24 +11,33 @@ function isLoggedInAndAdmin(req, res, next) {
   }
 }
 
+var sortByTimezone = (a, b) => {
+  return a.profile.timezone - b.profile.timezone
+}
+
 /* GET users listing. */
 router.get('/', isLoggedInAndAdmin, function (req, res, next) {
   let data = {}
+
   User.find({ 'slack.team.id': req.user.slack.team.id }, {
     'slack.displayName': 1,
     'slack.team.name': 1,
     'profile': 1,
-    'partners': 1
-  })
+    'partners': 1,
+    'matchedTo': 1
+  }).populate('matchedTo', 'slack.displayName')
   .then(function (userList) {
-    data.userList = userList;
+    data.userList = userList.sort(sortByTimezone);
     const _idList = userList.map(function (user) {
       return user._id
     })
+    /* Find all matches that belong to the array of _idList */
     return Match.find({users: { $in: _idList }})
+                .populate('users', 'slack.displayName')
   })
   .then(function (matches) {
     data.matches = matches;
+
     res.render('admin', data)
   })
   .catch(function(err){
