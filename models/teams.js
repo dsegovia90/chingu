@@ -1,13 +1,14 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-var Team = new Schema({
+const Schema = mongoose.Schema;
+
+const Team = new Schema({
   accessToken: String,
   scope: String,
   userId: String,
   teamName: String,
   teamId: String,
-  installedOn: { type: Date, default: new Date() }
+  installedOn: { type: Date, default: new Date() },
 });
 
 module.exports = mongoose.model('Team', Team);

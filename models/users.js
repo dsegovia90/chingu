@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-var User = new Schema({
-	slack: {
-		id: String,
-		displayName: String,
+const Schema = mongoose.Schema;
+
+const User = new Schema({
+  slack: {
+    id: String,
+    displayName: String,
     email: String,
     image: String,
     team: {
