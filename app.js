@@ -18,8 +18,7 @@ const store = new MongoDBStore(
   {
     uri: process.env.MONGO_URI,
     collection: 'userSessions',
-  },
-);
+  });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
