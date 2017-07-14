@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize mongoose with the .env variable
 mongoose.connect(process.env.MONGO_URI);
-// mongoose.Promise = global.Promises
+mongoose.Promise = require('bluebird');
 
 // Used to keep session during page changes
 app.use(session({
