@@ -19,7 +19,6 @@ module.exports = function passportFunc(passport) {
       process.nextTick(() => {
         User.findOne({ 'slack.id': profile.id })
           .then((user) => {
-            console.log(user);
             if (user) {
               return done(null, user);
             }
