@@ -14,7 +14,7 @@ if(message)
     if(user.admin)
       a(href='/admin') Admin Page
 
-if(user.pending.created)
+if(user.matchedTo)
   p Already requested a match.
 else
   a(href='/request-match')
