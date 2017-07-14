@@ -12,35 +12,28 @@ router.get('/', function (req, res) {
   if (req.user.newMatch) {
     data.message = "Success! You have a new pair programming partner!";
     User.findByIdAndUpdate(req.user._id, {$unset: {newMatch: ""}})
-    .exec(function(err) {
-      if (err) {
-        console.error(err);
-      }
+    .catch(function(err){
+      console.error(err);
     });
   }
 
   // prepare information on current matches
-  Match.find({users: req.user}, {"users": {$elemMatch: { $ne: req.user._id }}})
+  Match.find(
+    {users: req.user}, //I'm not quite sure why this line is working
+    {"users": {$elemMatch: { $ne: req.user._id }}} //restrict fields to exclude same 
+  )
   .populate('users', 'slack.displayName slack.image')
-  .exec(function(err, matches) {
-    if (err) {
-      console.error(err);
-    }
-    else if (matches.length) {
-      // each element of matches an object with key/value pairs:
-      // _id: <match>,
-      // created: <date of match creation>,
-      // users: [{ _id: <user>, slack: <obj w/ displayName & image>}]
-
-      // extract user object from matches element
+  .then(function(matches){
+    if(matches.length){
       data.matches = matches.map(function(match) {
         return match.users[0];
       });
     }
-
-    // send response
-    res.render('dash', data);
-  });
+    res.render('dash', data); // placing here to avoid async issues
+  })
+  .catch(function(err){
+    console.error(err);
+  })
 });
 
 module.exports = router;

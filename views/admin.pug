@@ -13,7 +13,7 @@ include includes/layout.pug
 hr
 
 h3 Users
-table#user-table
+table#users-table
   tr
     th Display Name
     th Team
@@ -26,7 +26,18 @@ table#user-table
       td #{ppUser.slack.displayName}
       td #{teamName}
       td #{ppUser.profile.timezone}
-      td #{ppUser.profile.fccLevel}
-      td Partners
+      td #{ppUser.profile.fccScore}
+      td #{ppUser.matchedTo ? ppUser.matchedTo.slack.displayName : ''}
+h3 Matches
+table#matches-table
+  tr
+    th Created
+    th User1
+    th User2
+  each match in matches
+    tr
+      td #{match.created}
+      td #{match.users[0].slack.displayName}
+      td #{match.users[1].slack.displayName}
 
 script(src='javascripts/main.js')

@@ -17,6 +17,6 @@ a {
   display: none;
 }
 
-#user-table {
+#users-table, #matches-table {
   margin: auto;
 }
