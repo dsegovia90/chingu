@@ -4,6 +4,8 @@ const router = express.Router();
 
 const User = require('../../models/users');
 
+const responses = require('../../lib/slack-responses');
+
 router.get('/', function (req, res) {
   res.send('Here I am - You called me?');
 });
@@ -15,22 +17,35 @@ router.post('/', function (req, res) {
   }
 
   // find user in database
-  User.findOne({ 'slack.id': req.body.user_id })
+  User.findOne({ 'slack.id': req.body.user_id, 'slack.team.id': req.body.team_id })
   .then(
-    function resolved (user) {
+    function resolved(user) {
       if (user) {
-        res.json({
-          text: 'Hi, there - I know you!',
-        });
-      } else {
-        res.json({
-          text: 'A newbie!',
-        });
+        return [null, user];
       }
+      const newUser = new User();
+      newUser.slack.id = req.body.user_id;
+      newUser.slack.user_name = req.body.user_name;
+      newUser.slack.team.id = req.body.team_id;
+      newUser.slack.team.domain = req.body.team_domain;
+      newUser.admin = false;
+
+      return Promise.all([true, newUser.save()]);
     })
+    .then(
+      function sendResponse([isNew, user]) {
+        if (isNew) {
+          res.json(responses.newUser(user.slack.displayName));
+        } else {
+          res.json({
+            text: 'Welcome back, ' + user.slack.displayName + '!'
+          });
+        }
+      }
+    )
     .catch(function (error) {
       console.error(error);
-      res.json({text: 'error'});
+      res.json({ text: 'error' });
     });
 });
 
