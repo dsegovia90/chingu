@@ -41,6 +41,10 @@ router.use('/request-match', isLoggedIn, require('./request-match'));
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
 
+/* handle requests coming in from the slack app */
+router.use('/slack', require('./slack'));
+
+
 /* GET home page (i.e. user dash). */
 router.get('/', isLoggedIn, require('./dash'));
 
