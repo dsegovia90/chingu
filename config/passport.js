@@ -17,7 +17,7 @@ module.exports = function passportFunc(passport) {
   },
     (token, refreshToken, profile, done) => {
       process.nextTick(() => {
-        User.findOne({ 'slack.id': profile.id })
+        User.findOne({ 'slack.id': profile.id, 'slack.team.id': profile.team.id })
           .then((user) => {
             if (user) {
               return done(null, user);

@@ -35,10 +35,10 @@ router.post('/', function (req, res) {
     .then(
       function sendResponse([isNew, user]) {
         if (isNew) {
-          res.json(responses.newUser(user.slack.displayName));
+          res.json(responses.newUser(user.slack.user_name));
         } else {
           res.json({
-            text: 'Welcome back, ' + user.slack.displayName + '!'
+            text: 'Welcome back, ' + user.slack.user_name + '!'
           });
         }
       }
