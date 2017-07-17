@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var slack = require('slack')
-var Team = require('../models/teams')
+const express = require('express');
+
+const router = express.Router();
+const passport = require('passport');
+const slack = require('slack');
+const Team = require('../models/teams');
 
 /* Start slack OAuth flow */
 router.get('/slack', passport.authenticate('slack'));
