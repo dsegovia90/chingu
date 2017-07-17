@@ -12,22 +12,26 @@ include includes/layout.pug
 
 hr
 
+h3 Team
+p #{teamName}
+
 h3 Users
 table#users-table
   tr
     th Display Name
-    th Team
+    th Username
     th Timezone
     th FCC Score
-    th Match
   each ppUser in userList
-    -var teamName = ppUser.slack.team.name.substring(7)
+    -var displayName = ppUser.slack.displayName || "-"
+    -var username = ppUser.slack.user_name || "-"
+    -var timezone = ppUser.profile.timezone || "-"
+    -var fccScore = ppUser.profile.fccScore || "-"
     tr
-      td #{ppUser.slack.displayName}
-      td #{teamName}
-      td #{ppUser.profile.timezone}
-      td #{ppUser.profile.fccScore}
-      td #{ppUser.matchedTo ? ppUser.matchedTo.slack.displayName : ''}
+      td #{displayName}
+      td #{username}
+      td #{timezone}
+      td #{fccScore}
 h3 Matches
 table#matches-table
   tr
@@ -35,9 +39,11 @@ table#matches-table
     th User1
     th User2
   each match in matches
+    -var first = match.users[0].slack.displayName || match.users[0].slack.user_name
+    -var second = match.users[1].slack.displayName || match.users[1].slack.user_name
     tr
       td #{match.created}
-      td #{match.users[0].slack.displayName}
-      td #{match.users[1].slack.displayName}
+      td #{first}
+      td #{second}
 
 script(src='javascripts/main.js')
