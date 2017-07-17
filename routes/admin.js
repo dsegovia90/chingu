@@ -32,7 +32,8 @@ router.get('/', isLoggedInAndAdmin, function (req, res) {
     return getUserIds(users);
   })
   .then(function fulfilled(ids) {
-    return Match.find({ users: { $in: ids } });
+    return Match.find({ users: { $in: ids } })
+    .populate('users', 'slack.displayName slack.user_name');
   })
   .then(function (matches) {
     data.matches = matches;

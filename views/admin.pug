@@ -39,9 +39,11 @@ table#matches-table
     th User1
     th User2
   each match in matches
+    -var first = match.users[0].slack.displayName || match.users[0].slack.user_name
+    -var second = match.users[1].slack.displayName || match.users[1].slack.user_name
     tr
       td #{match.created}
-      td #{match.users[0].slack.displayName}
-      td #{match.users[1].slack.displayName}
+      td #{first}
+      td #{second}
 
 script(src='javascripts/main.js')
