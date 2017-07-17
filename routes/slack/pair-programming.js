@@ -41,9 +41,7 @@ router.post('/', function (req, res) {
         if (isNew) {
           res.json(responses.newUser(user.slack.user_name));
         } else {
-          res.json({
-            text: 'Welcome back, ' + user.slack.user_name + '!'
-          });
+          res.json(responses.returningUser(user.slack.user_name));
         }
       }
     )
