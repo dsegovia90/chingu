@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const responses = require('../../lib/slack-responses');
+const responses = require('../../lib/slack/responses');
 const User = require('../../models/users');
 
 router.post('/', function(req, res) {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const User = require('../../models/users');
 
-const responses = require('../../lib/slack-responses');
+const responses = require('../../lib/slack/responses');
 
 router.get('/', function (req, res) {
   res.send('Here I am - You called me?');
