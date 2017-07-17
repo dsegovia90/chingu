@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var slack = require('slack');
 
 /*  Checks if the user is authenticated,
     it can be used to redirect to /login unauthenticated
@@ -19,6 +20,18 @@ function isLoggedIn(req, res, next) {
 router.use(function (req, res, next) {
   res.locals.user = req.user;
   next();
+});
+
+router.get('/testing', function(req, res) {
+  var token = process.env.ACCESS_TOKEN;
+  var user = "U5RCWV0LS";
+  slack.im.open({token, user}, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(data);
+  });
+
 });
 
 /* Landing Page! (where users log in via slack) */
