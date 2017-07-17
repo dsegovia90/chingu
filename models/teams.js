@@ -8,6 +8,10 @@ const Team = new Schema({
   userId: String,
   teamName: String,
   teamId: String,
+  bot: {
+    bot_user_id: String,
+    bot_access_token: String
+  }
   installedOn: { type: Date, default: new Date() },
 });
 
