@@ -17,7 +17,11 @@ router.post('/', function (req, res) {
   }
 
   // find user in database
-  User.findOne({ 'slack.id': req.body.user_id, 'slack.team.id': req.body.team_id })
+  User.findOneAndUpdate(
+    { 'slack.id': req.body.user_id, 'slack.team.id': req.body.team_id },
+    { $set: { 'slack.user_name': req.body.user_name } },
+    { new: true }
+  )
   .then(
     function resolved(user) {
       if (user) {
