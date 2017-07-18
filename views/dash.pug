@@ -23,17 +23,15 @@ if(message)
           small Logout
     
 .info-div
-  .container.text-center
-    if(user.pending.created)
-      p Already requested a match.
-    else
+  if(!user.pending.created)
+    .container.text-center.match-div
       a(href='/request-match')
         button.btn Request Match
 
-  .container.text-center
-    if(user.pending.created)
+  if(user.pending.created)
+    .container.text-center
       h3 Match Request
-      table#users-table.table.table-sm.table-hover
+      table#match-table.table.table-sm.table-hover
         thead
           tr
             th.text-center Last Updated
@@ -49,7 +47,9 @@ if(message)
         small Edit
       a(href='/request-match/delete') 
         small Delete
-      hr
+
+  .container
+    hr
 
   .container.text-center
     if(matches)
