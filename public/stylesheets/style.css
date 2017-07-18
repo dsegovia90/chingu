@@ -1,5 +1,4 @@
 
-
 .title-div {
   background-color: #4CAF50;
   padding: 30px 0;
@@ -21,6 +20,10 @@
 
 thead {
   background-color: #80e27e;
+}
+
+tbody {
+  background-color: #FFF;
 }
 
 #request-form {
