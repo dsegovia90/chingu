@@ -23,13 +23,11 @@ router.get('/slack/install', function (req, res) {
   var redirect_uri = process.env.INSTALL_URI;
 
   slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
-    console.log(data)
     if(err){
       console.error(err);
     }
     Team.findOne({accessToken: data.access_token})
     .then(function(team){
-      console.log(team)
       if(team){
         // Team exists already
         team.accessToken = data.access_token;
