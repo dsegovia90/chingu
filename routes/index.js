@@ -49,3 +49,4 @@ router.use('/slack', require('./slack'));
 router.get('/', isLoggedIn, require('./dash'));
 
 module.exports = router;
+
