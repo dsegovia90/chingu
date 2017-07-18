@@ -26,7 +26,6 @@ router.get('/slack/install', function (req, res) {
     if(err){
       console.error(err);
     }
-    console.log(data);
     Team.findOne({accessToken: data.access_token})
     .then(function(team){
       if(team){
