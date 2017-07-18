@@ -54,7 +54,7 @@ router.get('/slack/install', function (req, res) {
         newTeam.userId = data.user_id;
         newTeam.teamName = data.team_name;
         newTeam.teamId = data.team_id;
-        team.bot = {
+        newTeam.bot = {
           bot_user_id: data.bot.bot_user_id,
           bot_access_token: data.bot.bot_access_token
         }
