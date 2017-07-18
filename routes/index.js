@@ -26,7 +26,7 @@ router.use(function (req, res, next) {
 router.get('/login', function (req, res) {
   res.render('login', {
     title: 'Chingu PP',
-    installLink: process.env.INSTALL_URI
+    installLink: process.env.INSTALL_LINK
   });
 });
 

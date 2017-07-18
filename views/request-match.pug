@@ -1,24 +1,35 @@
 include includes/layout.pug
 
-.div Hello world
+.title-div
+  .container
+    .media
+      img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
+      .media-body
+        h1.mt-0 Chingu PP Request Match
+    
 
-.form-div
-  -var timezones = [-12,-11,-10,-9.5,-9,-8,-7,-6,-5,-4,-3.5,-3,-2.5,-2,-1,0,1,2,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,9.5,10,10.5,11,12,13,14]
-  form(action='/request-match' method='POST')#timezone-form
-    select(form='timezone-form' name='timezone')#timezone-select
-      each timezone in timezones
-        -var selected = user.profile.timezone === timezone
-        -var timeText = (timezone > 0 ? '+' + timezone : timezone)
-        -timeText = (timezone === 0 ? '±0' : timeText)
-        option(value=timezone selected=selected) UTC#{timeText}
+.info-div.text-center
+  .container
+    -var timezones = [-12,-11,-10,-9.5,-9,-8,-7,-6,-5,-4,-3.5,-3,-2.5,-2,-1,0,1,2,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,9.5,10,10.5,11,12,13,14]
+    form#request-match-form(action='/request-match' method='POST')
+      .form-group
+        label(for='timezone-select') Timezone
+          select#timezone-select.form-control(name='timezone')
+            each timezone in timezones
+              -var selected = user.profile.timezone === timezone
+              -var timeText = (timezone > 0 ? '+' + timezone : timezone)
+              -timeText = (timezone === 0 ? '±0' : timeText)
+              option(value=timezone selected=selected) UTC#{timeText}
+      .form-group
+        label(for='fccScore-select') Free Code Camp Level
+          select#fccScore-select.form-control(name='fccScore')
+            each level, index in fccLevels
+              -var leveltext = (level[0] + " - " + level[1])
+              -var selected = user.profile.fccLevel === leveltext
+              option(value=index selected=selected) #{leveltext}
 
-    select(name='fccScore')
-      each level, index in fccLevels
-        -var leveltext = (level[0] + " - " + level[1])
-        -var selected = user.profile.fccLevel === leveltext
-        option(value=index selected=selected) #{leveltext}
-
-    input(type='submit' value='Submit')
-  a(href='/')
-    button Cancel
+  .container
+    button.btn(form='request-match-form' type='submit') Submit
+    a(href='/')
+      button#btn-cancel.btn Cancel
 include includes/scripts.pug
