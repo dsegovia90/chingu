@@ -4,39 +4,59 @@ if(message)
   .message #{message}
 
 .title-div
-  h1 #{title}
+  .container
+    .media
+      img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
+      .media-body
+        h1.mt-0 #{title}
 .user-div
-  -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-  img#avatar(src=avatar width=125 height=125)
-  p #{user.slack.displayName}
-  small
-    a(href='/logout') Logout
-    if(user.admin)
-      a(href='/admin') Admin Page
+  .container
+    -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+    .media
+      img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
+      .media-body
+        h5#user-name.mt-0 #{user.slack.displayName}
+        if(user.admin)
+          a(href='/admin')
+            small Admin Page
+        a(href='/logout') 
+          small Logout
+    
+.info-div
+  if(!user.pending.created)
+    .container.text-center.match-div
+      a(href='/request-match')
+        button.btn Request Match
 
-if(user.pending.created)
-  p Already requested a match.
-else
-  a(href='/request-match')
-    button Request Match
+  if(user.pending.created)
+    .container.text-center
+      h3 Match Request
+      table#match-table.table.table-sm.table-hover
+        thead
+          tr
+            th.text-center Last Updated
+            th.text-center FCC Lvl
+            th.text-center Timezone
+        tbody
+          tr
+            td #{user.pending.created}
+            td #{user.profile.fccLevel}
+            td.text-center #{user.profile.timezone}
 
-hr
+      a(href='/request-match')
+        small Edit
+      a(href='/request-match/delete') 
+        small Delete
 
-if(user.pending.created)
-  h3 Match Request
-  p Last Updated: #{user.pending.created}
-  p FCC Lvl: #{user.profile.fccLevel}
-  p Timezone: #{user.profile.timezone}
-  p Matched: Not yet Matched
-  a(href='/request-match') Edit
-  br
-  a(href='/request-match/delete') Delete
+  .container
+    hr
 
-if(matches)
-  h3 Your Matches
-  each match in matches
-    -var matchID = match.slack.displayName
-    p #{matchID}
-else
-  h3 No current matches
-script(src='javascripts/main.js')
+  .container.text-center
+    if(matches)
+      h3 Your Matches
+      each match in matches
+        -var matchID = match.slack.displayName
+        p #{matchID}
+    else
+      h3 No current matches
+include includes/scripts.pug

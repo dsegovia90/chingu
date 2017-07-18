@@ -1,22 +1,47 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  text-align: center;
-  background-color: #D9853B;
+  background-color: #F5F5F6;
 }
 
-a {
-  color: #00B7FF;
+.container {
+  padding-bottom: 30px;
+}
+
+.title-div {
+  background-color: #4CAF50;
+  padding-top: 30px;
+}
+
+.user-div {
+  background-color: #E1E2E1;
+  padding-top: 30px;
+}
+
+.info-div{
+  padding-top: 30px;
+  background-color: #F5F5F6;
 }
 
 #avatar {
   border-radius: 50%;
 }
 
-#request-form {
-  display: none;
+.btn {
+  background-color: #00e676;
+  font-family: inherit;
 }
 
-#users-table, #matches-table {
-  margin: auto;
+#match-table, hr {
+  margin: 0;
+}
+
+thead {
+  background-color: #80e27e;
+}
+
+tbody {
+  background-color: #FFF;
+}
+
+#request-form {
+  display: none;
 }
