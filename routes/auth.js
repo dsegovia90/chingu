@@ -23,6 +23,7 @@ router.get('/slack/install', function (req, res) {
   var redirect_uri = process.env.INSTALL_URI;
 
   slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
+    console.log(data)
     if(err){
       console.error(err);
     }
