@@ -6,6 +6,7 @@ const User = new Schema({
   slack: {
     id: String,
     displayName: String,
+    user_name: String,
     email: String,
     image: String,
     team: {

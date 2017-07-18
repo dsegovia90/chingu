@@ -17,11 +17,10 @@ router.get('/slack/callback',
 );
 
 router.get('/slack/install', function (req, res) {
-
   var client_id = process.env.SLACK_CLIENT_ID;
   var client_secret = process.env.SLACK_CLIENT_SECRET;
   var code = req.query.code;
-  var redirect_uri = 'http://localhost:3000/auth/slack/install'
+  var redirect_uri = process.env.INSTALL_URI;
 
   slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
     if(err){
@@ -36,6 +35,10 @@ router.get('/slack/install', function (req, res) {
         team.userId = data.user_id;
         team.teamName = data.team_name;
         team.teamId = data.team_id;
+        team.bot = {
+          bot_user_id: data.bot.bot_user_id,
+          bot_access_token: data.bot.bot_access_token
+        }
         team.save(function(err){
           if(err) {
             throw err
@@ -50,6 +53,10 @@ router.get('/slack/install', function (req, res) {
         newTeam.userId = data.user_id;
         newTeam.teamName = data.team_name;
         newTeam.teamId = data.team_id;
+        newTeam.bot = {
+          bot_user_id: data.bot.bot_user_id,
+          bot_access_token: data.bot.bot_access_token
+        }
         newTeam.save(function(err){
           if(err) {
             throw err;

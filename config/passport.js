@@ -17,7 +17,16 @@ module.exports = function passportFunc(passport) {
   },
     (token, refreshToken, profile, done) => {
       process.nextTick(() => {
-        User.findOne({ 'slack.id': profile.id })
+        User.findOneAndUpdate(
+          { 'slack.id': profile.id, 'slack.team.id': profile.team.id },
+          { $set: {
+            'slack.displayName': profile.user.name,
+            'slack.email': profile.user.email,
+            'slack.image': profile.user.image_1024,
+            'slack.team.name': profile.team.name,
+            'slack.team.image': profile.team.image_original,
+          } }
+        )
           .then((user) => {
             if (user) {
               return done(null, user);

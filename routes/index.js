@@ -25,7 +25,7 @@ router.use(function (req, res, next) {
 router.get('/login', function (req, res) {
   res.render('login', {
     title: 'Chingu PP',
-    installLink: process.env.INSTALL_URI
+    installLink: process.env.INSTALL_LINK
   });
 });
 
@@ -40,6 +40,10 @@ router.use('/request-match', isLoggedIn, require('./request-match'));
 
 /* Handle slack OAuth process */
 router.use('/auth', require('./auth'));
+
+/* handle requests coming in from the slack app */
+router.use('/slack', require('./slack'));
+
 
 /* GET home page (i.e. user dash). */
 router.get('/', isLoggedIn, require('./dash'));
