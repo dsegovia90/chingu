@@ -30,6 +30,10 @@ body {
   font-family: inherit;
 }
 
+#btn-cancel {
+  background-color: #66ffa6;
+}
+
 #match-table, hr {
   margin: 0;
 }
