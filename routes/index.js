@@ -22,18 +22,6 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.get('/testing', function(req, res) {
-  var token = process.env.ACCESS_TOKEN;
-  var user = "U5RCWV0LS";
-  slack.im.open({token, user}, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(data);
-  });
-
-});
-
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
   res.render('login', {

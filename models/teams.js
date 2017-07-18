@@ -11,7 +11,7 @@ const Team = new Schema({
   bot: {
     bot_user_id: String,
     bot_access_token: String
-  }
+  },
   installedOn: { type: Date, default: new Date() },
 });
 

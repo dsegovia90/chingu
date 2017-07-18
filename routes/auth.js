@@ -26,6 +26,7 @@ router.get('/slack/install', function (req, res) {
     if(err){
       console.error(err);
     }
+    console.log(data);
     Team.findOne({accessToken: data.access_token})
     .then(function(team){
       if(team){
@@ -53,6 +54,10 @@ router.get('/slack/install', function (req, res) {
         newTeam.userId = data.user_id;
         newTeam.teamName = data.team_name;
         newTeam.teamId = data.team_id;
+        team.bot = {
+          bot_user_id: data.bot.bot_user_id,
+          bot_access_token: data.bot.bot_access_token
+        }
         newTeam.save(function(err){
           if(err) {
             throw err;
