@@ -1,49 +1,64 @@
 include includes/layout.pug
 
 .title-div
-  h1 Chingu PP Admin Page
+  .container
+    .media
+      img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
+      .media-body
+        h1.mt-0 Chingu PP Admin Page
 .user-div
-  -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-  img#avatar(src=avatar width=125 height=125)
-  p #{user.slack.displayName}
-  small
-    a(href='/logout') Logout
-    a(href='/') User Page
+  .container
+    -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+    .media
+      img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
+      .media-body
+        h5#user-name.mt-0 #{user.slack.displayName}
+        a(href='/')
+          small User Page
+        a(href='/logout') 
+          small Logout
 
-hr
+.info-div
+  .container.text-center
+    h3 Team
+    p #{teamName}
+  .container
+    hr
+  .container
+    h3.text-center Users
+    table#match-table.table.table-sm.table-hover
+      thead
+        tr
+          th.text-center Display Name
+          th.text-center Username
+          th.text-center Timezone
+          th.text-center FCC Score
+      tbody
+        each ppUser in userList
+          -var displayName = ppUser.slack.displayName || "-"
+          -var username = ppUser.slack.user_name || "-"
+          -var timezone = ppUser.profile.timezone || "-"
+          -var fccScore = ppUser.profile.fccScore || "-"
+          tr
+            td #{displayName}
+            td #{username}
+            td.text-center #{timezone}
+            td.text-center #{fccScore}
+  .container.text-center        
+    h3.text-center Matches
+    table#matches-table.table.table-sm.table-hover
+      thead
+        tr
+          th.text-center Created
+          th.text-center User1
+          th.text-center User2
+      tbody
+        each match in matches
+          -var first = match.users[0].slack.displayName || match.users[0].slack.user_name
+          -var second = match.users[1].slack.displayName || match.users[1].slack.user_name
+          tr
+            td #{match.created}
+            td #{first}
+            td #{second}
 
-h3 Team
-p #{teamName}
-
-h3 Users
-table#users-table
-  tr
-    th Display Name
-    th Username
-    th Timezone
-    th FCC Score
-  each ppUser in userList
-    -var displayName = ppUser.slack.displayName || "-"
-    -var username = ppUser.slack.user_name || "-"
-    -var timezone = ppUser.profile.timezone || "-"
-    -var fccScore = ppUser.profile.fccScore || "-"
-    tr
-      td #{displayName}
-      td #{username}
-      td #{timezone}
-      td #{fccScore}
-h3 Matches
-table#matches-table
-  tr
-    th Created
-    th User1
-    th User2
-  each match in matches
-    -var first = match.users[0].slack.displayName || match.users[0].slack.user_name
-    -var second = match.users[1].slack.displayName || match.users[1].slack.user_name
-    tr
-      td #{match.created}
-      td #{first}
-      td #{second}
-
-script(src='javascripts/main.js')
+include includes/scripts.pug
