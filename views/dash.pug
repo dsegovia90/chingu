@@ -23,11 +23,6 @@ if(message)
           small Logout
     
 .info-div
-  if(!user.pending.created)
-    .container.text-center.match-div
-      a(href='/request-match')
-        button.btn Request Match
-
   if(user.pending.created)
     .container.text-center
       h3 Match Request
@@ -47,6 +42,11 @@ if(message)
         small Edit
       a(href='/request-match/delete') 
         small Delete
+
+  else
+    .container.text-center.match-div
+      a(href='/request-match')
+        button.btn Request Match
 
   .container
     hr
