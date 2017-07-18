@@ -2,7 +2,7 @@
 
 Pair programming is a great - and fun! - way to build programming skills, but finding someone to program with can be tricky.
 
-Chingu-PP makes it easy for members of the Chingu cohorts to find a pair programming partner - simply log in (or install our slack app), request a partner, and wait to be matched.
+Chingu-PP makes it easy for members of the Chingu cohorts to find a pair programming partner - simply log in (or install the Chingu-PP slack app), request a partner, and wait to be matched.
 
 Chingu-PP is a Build-to-Learn project started by members of the Honey Badgers cohort. Please be patient as we continue to work out bugs, make improvements, and add new features.
 
@@ -12,11 +12,11 @@ And (of course!) feel free to join in the fun!
 
 #### Using the app and website
 
-Getting started with the website is as simple as navigating to our url ((ADD URL HERE)), and signing in. You can request a pair programming partner using a quick two-question form, and can view information on current and pending match requests.
+Getting started with the website is as simple as navigating to the app ((ADD URL HERE)), and signing in. You can request a pair programming partner using a quick two-question form, and can view information on current and pending match requests.
 
 Install the Chingu-PP app to your slack team to access additional features. The app allows you to:
 - Request a pair programming partner from within Slack.
-- Receive a message from our bot user when you are matched.
+- Receive a message from the Chingu-PP bot user when you are matched.
 
 #### Contributing
 
