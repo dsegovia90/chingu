@@ -28,10 +28,11 @@ body {
 .btn {
   background-color: #00e676;
   font-family: inherit;
+  margin: 0 15px;
 }
 
 #btn-cancel {
-  background-color: #66ffa6;
+  background-color: #ff8a50;
 }
 
 #match-table, hr {
