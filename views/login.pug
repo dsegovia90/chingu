@@ -12,7 +12,13 @@ include includes/layout.pug
     h3 Welcome to #{title}
     p Please use the button below to sign in with your slack group.
     a(href='/auth/slack')
-      img(src='images/sign_in_with_slack.png')
+      img(
+        alt='Sign in with Slack' 
+        height='40' 
+        width='172' 
+        src='images/sign_in_with_slack.png' 
+        srcset='images/sign_in_with_slack.png 1x, images/sign_in_with_slack@2x.png 2x'
+        )
   .container
     hr
   .container
