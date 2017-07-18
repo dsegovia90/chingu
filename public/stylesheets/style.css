@@ -1,18 +1,23 @@
 body {
   background-color: #F5F5F6;
 }
+
+.container {
+  padding-bottom: 30px;
+}
+
 .title-div {
   background-color: #4CAF50;
-  padding: 30px 0;
+  padding-top: 30px;
 }
 
 .user-div {
   background-color: #E1E2E1;
-  padding: 30px;
+  padding-top: 30px;
 }
 
 .info-div{
-  padding: 30px;
+  padding-top: 30px;
   background-color: #F5F5F6;
 }
 
@@ -23,6 +28,10 @@ body {
 .btn {
   background-color: #00e676;
   font-family: inherit;
+}
+
+#match-table, hr {
+  margin: 0;
 }
 
 thead {
