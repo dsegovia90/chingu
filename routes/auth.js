@@ -28,6 +28,7 @@ router.get('/slack/install', function (req, res) {
     }
     Team.findOne({accessToken: data.access_token})
     .then(function(team){
+      console.log(team)
       if(team){
         // Team exists already
         team.accessToken = data.access_token;
