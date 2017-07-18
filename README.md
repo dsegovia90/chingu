@@ -20,7 +20,9 @@ Install the Chingu-PP app to your slack team to access additional features. The 
 
 #### Contributing
 
-Notice a bug? Have an idea for an improvement? Interested in helping? Please let us know. You can open an issue (preferred) or message us on Slack or via email with your thoughts.
+Notice a bug? Have an idea for an improvement? Interested in helping? Please let us know.
+
+Help and contributions are welcome: Go ahead and open an issue or make a pull request. For larger changes - beyond bug fixes - we recommend that you talk to one of the project authors first. You can open an issue (preferred) or contact us on Slack or via email with your thoughts.
 
 ## Authors
 - Daniel ([sego90](https://github.com/sego90))
