@@ -2,7 +2,10 @@ include includes/layout.pug
 
 .title-div
   .container
-    h1 Chingu PP Admin Page
+    .media
+      img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
+      .media-body
+        h1.mt-0 Chingu PP Admin Page
 .user-div
   .container
     -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
