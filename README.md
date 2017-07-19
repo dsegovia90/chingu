@@ -12,7 +12,7 @@ And (of course!) feel free to join in the fun!
 
 #### Using the app and website
 
-Getting started with the website is as simple as navigating to the app ((ADD URL HERE)), and signing in. You can request a pair programming partner using a quick two-question form, and can view information on current and pending match requests.
+Getting started with the website is as simple as navigating to the app (https://chingupp.herokuapp.com/), and signing in. You can request a pair programming partner using a quick two-question form, and can view information on current and pending match requests.
 
 Install the Chingu-PP app to your slack team to access additional features. The app allows you to:
 - Request a pair programming partner from within Slack.
