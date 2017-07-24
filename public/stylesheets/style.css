@@ -1,7 +1,6 @@
 body {
   background-color: #F5F5F6;
 }
-
 .container {
   padding-bottom: 30px;
 }
@@ -19,6 +18,11 @@ body {
 .info-div{
   padding-top: 30px;
   background-color: #F5F5F6;
+}
+
+footer {
+  padding-top: 30px;
+  text-align: center;
 }
 
 #avatar {
