@@ -5,6 +5,10 @@ body {
   padding-bottom: 30px;
 }
 
+.alert {
+  margin-bottom: 0;
+}
+
 .title-div {
   background-color: #4CAF50;
   padding-top: 30px;
