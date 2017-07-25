@@ -7,7 +7,8 @@ const fcc = require('../lib/fccScore.js');
 
 router.get('/', function (req, res) {
   const fccLevels = fcc.toLevelsArray();
-  res.render('request-match', { fccLevels });
+  const timezones = require('../lib/timezones.js');
+  res.render('request-match', { fccLevels, timezones });
 });
 
 router.post('/', function (req, res) {
