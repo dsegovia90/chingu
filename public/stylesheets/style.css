@@ -14,6 +14,10 @@ body {
   padding-top: 30px;
 }
 
+#title {
+  margin-bottom: 30px;
+}
+
 .user-div {
   background-color: #E1E2E1;
   padding-top: 30px;
