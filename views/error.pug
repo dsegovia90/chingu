@@ -11,7 +11,10 @@ include includes/layout.pug
 .info-div.text-center
   .container 
     h2#title Whoops, something went wrong!
-    p= error.message
     a(href='/') Home
+    p= error.message
+    h2= error.status
+.container
+  pre #{error.stack}
 
 include includes/scripts.pug
