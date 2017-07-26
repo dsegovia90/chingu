@@ -17,6 +17,13 @@ router.get('/slack/callback',
 );
 
 router.get('/slack/install', function (req, res) {
+  if(req.query.error){
+    error = {
+      message: req.query.error,
+      status: 500
+    }
+    res.render('error', {error: error})
+  }
   var client_id = process.env.SLACK_CLIENT_ID;
   var client_secret = process.env.SLACK_CLIENT_SECRET;
   var code = req.query.code;
