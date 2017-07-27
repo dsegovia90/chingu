@@ -10,9 +10,9 @@ if(message)
       .media-body
         h1.mt-0 #{title}
 .user-div
-  .container
+  .container#user-container
     .row
-      .col-md-6
+      .col-md-6.container
         -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
         .media
           img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
@@ -23,12 +23,12 @@ if(message)
                 small Admin Page
             a(href='/logout') 
               small Logout
-      .col-md-6
+      .col-md-6.container
         if(team)
           h5.mt-0= team.teamName
         else
           .text-center
-            p We strongly suggest you install the app to get all special features.
+            p We strongly suggest you install the appon your slack group to get all special features.
             include includes/install-slack
     
 .info-div
