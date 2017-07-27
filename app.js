@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
+const flash = require('express-flash')
 require('dotenv').config();
 
 const index = require('./routes/index');
@@ -45,6 +46,8 @@ app.use(session({
     maxAge: 1000 * 60 * 60 // 1 hour
   },
 }));
+
+app.use(flash());
 
 // Point to the passport config file
 require('./config/passport.js')(passport);
