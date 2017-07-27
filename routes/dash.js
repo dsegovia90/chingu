@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
 
   // if new match in database, prepare success message
   if (req.user.newMatch) {
-    data.message = 'Success! You have a new pair programming partner!';
+    req.flash('success', 'Success! You have a new pair programming partner!');
     User.findByIdAndUpdate(req.user._id, { $unset: { newMatch: '' } })
     .catch(function (err) {
       console.error(err);
