@@ -41,6 +41,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store,
+  cookie: {
+    maxAge: 1000 * 60 * 60 // 1 hour
+  },
 }));
 
 // Point to the passport config file
