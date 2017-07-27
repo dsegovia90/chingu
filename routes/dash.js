@@ -29,6 +29,7 @@ router.get('/', function (req, res) {
   ])
   .then(function ([matches, team]) {
     data.team = team
+    data.installLink = process.env.INSTALL_LINK
     if (matches.length) {
       data.matches = matches.map(match => match.users[0]);
     }
