@@ -61,13 +61,15 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  const error = err;
+  error.status = error.status ? error.status : 500;
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = error.message;
+  res.locals.error = req.app.get('env') === 'development' ? error : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(error.status || 500);
   res.render('error');
 });
 
