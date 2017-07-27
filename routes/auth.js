@@ -41,12 +41,9 @@ router.get('/slack/install', function (req, res) {
         bot_access_token: data.bot.bot_access_token
       }
       team.save(function(err){
-        if(err) {
-          throw err
-        }else{
-          //send app already installed and success update message
-        }
+        if(err)throw err
       })
+      req.flash('success', 'Successfully installed the slack app!');
       res.redirect('/')
     })
   })
