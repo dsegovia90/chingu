@@ -11,16 +11,21 @@ if(message)
         h1.mt-0 #{title}
 .user-div
   .container
-    -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-    .media
-      img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
-      .media-body
-        h5#user-name.mt-0 #{user.slack.displayName}
-        if(user.admin)
-          a(href='/admin')
-            small Admin Page
-        a(href='/logout') 
-          small Logout
+    .row
+      .col-md-6
+        -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+        .media
+          img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
+          .media-body
+            h5#user-name.mt-0 #{user.slack.displayName}
+            if(user.admin)
+              a(href='/admin')
+                small Admin Page
+            a(href='/logout') 
+              small Logout
+      .col-md-6
+        if(team)
+          h5.mt-0= team.teamName
     
 .info-div
   if(user.pending.created)
