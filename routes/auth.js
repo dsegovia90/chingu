@@ -65,7 +65,7 @@ router.get('/slack/install', function (req, res) {
           }
         })
       }
-      res.redirect('/login')
+      res.redirect('/')
     })
   })
 })
