@@ -5,6 +5,14 @@ body {
   padding-bottom: 30px;
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
+.right {
+  float: right;
+}
+
 .alert {
   margin-bottom: 0;
 }
@@ -61,4 +69,8 @@ tbody {
 
 #request-form {
   display: none;
+}
+
+h1 {
+  font-family: 'Dosis', sans-serif;
 }
