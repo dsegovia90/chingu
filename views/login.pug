@@ -7,29 +7,43 @@ include includes/message.pug
     .media
       img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
       .media-body
-        h1.mt-0 Chingu Pair Programming
+        span.right.hidden-sm-down
+          a(href='/auth/slack')
+            img(
+              alt='Sign in with Slack'
+              height='40'
+              width='172'
+              src='images/sign_in_with_slack.png'
+              srcset='images/sign_in_with_slack.png 1x, images/sign_in_with_slack@2x.png 2x'
+              )
+        h1.mt-0
+          span.no-wrap Chingu-PP
+        h1.hidden-xs-down
+          span.small Learning together with Pair Programming
 
 .info-div.text-center
-  .container 
+  .container.description
     h2#title Welcome to #{title}
     .row
       .col-lg-5.offset-lg-1
-        p Pair programming is a great - and fun! way to build programming skills, but finding someone to program with can be tricky.
+        p Pair programming is a great - and fun! - way to build programming skills, but finding someone to program with can be tricky.
       .col-lg-5
-        p Chingu-PP makes it easy for members of the Chingu cohorts to find a pair programming partner. Are you ready to jumpstart your pair-programming journey1
-    h4 Sign in Now!
-    a(href='/auth/slack')
-      img(
-        alt='Sign in with Slack'
-        height='40'
-        width='172'
-        src='images/sign_in_with_slack.png'
-        srcset='images/sign_in_with_slack.png 1x, images/sign_in_with_slack@2x.png 2x'
-        )
+        p Chingu-PP makes it easy for members of the Chingu cohorts to find a pair programming partner. Are you ready to jumpstart your pair-programming journey?
+    .row
+      .col-lg-6.offset-lg-3
+        h4 Sign in Now!
+        a(href='/auth/slack')
+          img(
+            alt='Sign in with Slack'
+            height='40'
+            width='172'
+            src='images/sign_in_with_slack.png'
+            srcset='images/sign_in_with_slack.png 1x, images/sign_in_with_slack@2x.png 2x'
+            )
 
   .container
     hr
-  .container
+  .container.description
     h4 To get additional features, add our app to your Slack team.
     p Chingu-PP Slack app will:
     .row
@@ -41,7 +55,7 @@ include includes/message.pug
     include includes/install-slack.pug
 
 .footer-div.text-center
-  p 
+  p
     small Chingu-PP is a Build-to-Learn project created by members of the Honey Badgers cohort.<br>Check out our project repository on <a href="https://github.com/sego90/chingu">Github</a>!
 
 include includes/scripts.pug

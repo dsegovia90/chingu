@@ -24,7 +24,7 @@ router.use(function (req, res, next) {
 /* Landing Page! (where users log in via slack) */
 router.get('/login', function (req, res) {
   res.render('login', {
-    title: 'Chingu PP',
+    title: 'Chingu-PP',
     installLink: process.env.INSTALL_LINK
   });
 });
@@ -49,4 +49,3 @@ router.use('/slack', require('./slack'));
 router.get('/', isLoggedIn, require('./dash'));
 
 module.exports = router;
-
