@@ -5,7 +5,7 @@ include includes/layout.pug
     .media
       img.d-flex.mr-3(src='images/chingu.png' height=50 alt='Chingu Logo')
       .media-body
-        h1.mt-0 Chingu PP Admin Page
+        h1.mt-0 Chingu-PP Admin Page
 .user-div
   .container
     -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
@@ -15,7 +15,7 @@ include includes/layout.pug
         h5#user-name.mt-0 #{user.slack.displayName}
         a(href='/')
           small User Page
-        a(href='/logout') 
+        a(href='/logout')
           small Logout
 
 .info-div
@@ -44,7 +44,7 @@ include includes/layout.pug
             td #{username}
             td.text-center #{timezone}
             td.text-center #{fccScore}
-  .container.text-center        
+  .container.text-center
     h3.text-center Matches
     table#matches-table.table.table-sm.table-hover
       thead

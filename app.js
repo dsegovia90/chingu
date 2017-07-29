@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
+const flash = require('express-flash')
 require('dotenv').config();
 
 const index = require('./routes/index');
@@ -41,7 +42,12 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store,
+  cookie: {
+    maxAge: 1000 * 60 * 60 // 1 hour
+  },
 }));
+
+app.use(flash());
 
 // Point to the passport config file
 require('./config/passport.js')(passport);
@@ -61,13 +67,15 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  const error = err;
+  error.status = error.status ? error.status : 500;
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message = error.message;
+  res.locals.error = req.app.get('env') === 'development' ? error : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(error.status || 500);
   res.render('error');
 });
 

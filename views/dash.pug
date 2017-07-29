@@ -1,7 +1,6 @@
 include includes/layout.pug
 
-if(message)
-  include includes/message.pug
+include includes/message.pug
 
 .title-div
   .container
@@ -10,18 +9,25 @@ if(message)
       .media-body
         h1.mt-0 #{title}
 .user-div
-  .container
-    -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
-    .media
-      img#avatar.d-flex.mr-3(src=avatar width=100 height=100)
-      .media-body
-        h5#user-name.mt-0 #{user.slack.displayName}
-        if(user.admin)
-          a(href='/admin')
-            small Admin Page
-        a(href='/logout') 
-          small Logout
-    
+  .container#user-container
+    .row
+      .col-md-6.container.text-center
+        -var avatar = (user.slack.image ? user.slack.image : 'images/avatar-placeholder.png')
+        img#avatar.mr-3.d-inline-block(src=avatar width=100 height=100)
+        .d-inline-block
+          h5#user-name.mt-0 #{user.slack.displayName}
+          if(user.admin)
+            a(href='/admin')
+              small Admin Page
+          a(href='/logout')
+            small Logout
+      .col-md-6.container.text-center
+        if(team)
+          h5.mt-0= team.teamName
+        else
+          p We strongly suggest you install the app in your slack group to access all features.
+          include includes/install-slack
+
 .info-div
   if(user.pending.created)
     .container.text-center
@@ -40,7 +46,7 @@ if(message)
 
       a(href='/request-match')
         small Edit
-      a(href='/request-match/delete') 
+      a(href='/request-match/delete')
         small Delete
 
   else

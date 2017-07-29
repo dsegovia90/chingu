@@ -22,51 +22,36 @@ router.get('/slack/install', function (req, res) {
   var code = req.query.code;
   var redirect_uri = process.env.INSTALL_URI;
 
-  slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
-    if(err){
-      console.error(err);
-    }
-    Team.findOne({accessToken: data.access_token})
-    .then(function(team){
-      if(team){
-        // Team exists already
-        team.accessToken = data.access_token;
-        team.scope = data.scope;
-        team.userId = data.user_id;
-        team.teamName = data.team_name;
-        team.teamId = data.team_id;
-        team.bot = {
-          bot_user_id: data.bot.bot_user_id,
-          bot_access_token: data.bot.bot_access_token
-        }
-        team.save(function(err){
-          if(err) {
-            throw err
-          }else{
-            //send app already installed and success update message
-          }
-        })
-      }else{
-        var newTeam = new Team()
-        newTeam.accessToken = data.access_token;
-        newTeam.scope = data.scope;
-        newTeam.userId = data.user_id;
-        newTeam.teamName = data.team_name;
-        newTeam.teamId = data.team_id;
-        newTeam.bot = {
-          bot_user_id: data.bot.bot_user_id,
-          bot_access_token: data.bot.bot_access_token
-        }
-        newTeam.save(function(err){
-          if(err) {
-            throw err;
-          }else{
-            //send success installation message.
-          }
-        })
-      }
-      res.redirect('/login')
+  let dataPromise = new Promise((resolve, reject) => {
+    slack.oauth.access({ client_id, client_secret, code, redirect_uri }, (err, data) => {
+      resolve(data);
+      reject(err);
     })
+  })
+
+  dataPromise.then((data) => {
+    return Promise.all([Team.findOne({accessToken: data.access_token}), data])
+  }).then(([team, data]) => {
+    if(!team){
+      team = new Team(); // Team didn't exist.
+    }
+    team.accessToken = data.access_token;
+    team.scope = data.scope;
+    team.userId = data.user_id;
+    team.teamName = data.team_name;
+    team.teamId = data.team_id;
+    team.bot = {
+      bot_user_id: data.bot.bot_user_id,
+      bot_access_token: data.bot.bot_access_token
+    }
+    return team.save()
+  }).then(() => {
+    req.flash('success', 'Successfully installed the slack app!');
+    res.redirect('/')
+  }).catch((err) => {
+    console.error(err);
+    req.flash('danger', 'Failed to install app.');
+    res.redirect('/')
   })
 })
 
