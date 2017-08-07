@@ -7,7 +7,7 @@ const Team = require('../models/teams');
 
 router.get('/', function (req, res) {
   const data = {
-    title: 'Chingu PP',
+    title: 'Chingu-PP',
   };
 
   // if new match in database, prepare success message

@@ -19,15 +19,15 @@ include includes/message.pug
           if(user.admin)
             a(href='/admin')
               small Admin Page
-          a(href='/logout') 
+          a(href='/logout')
             small Logout
       .col-md-6.container.text-center
         if(team)
           h5.mt-0= team.teamName
         else
-          p We strongly suggest you install the appon your slack group to get all special features.
+          p We strongly suggest you install the app in your slack group to access all features.
           include includes/install-slack
-    
+
 .info-div
   if(user.pending.created)
     .container.text-center
@@ -46,7 +46,7 @@ include includes/message.pug
 
       a(href='/request-match')
         small Edit
-      a(href='/request-match/delete') 
+      a(href='/request-match/delete')
         small Delete
 
   else
